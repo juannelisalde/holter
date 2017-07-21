@@ -1,0 +1,19 @@
+.logo{
+    margin: 0px;
+    width: 23%;s
+}
+
+.main{
+	overflow: auto !important;
+}
+
+.nav-principal{
+	max-width: 100%;
+}
+
+.parent{
+	margin: 0 auto;
+}
+.profile-image-login{
+    max-width: 100px;
+}

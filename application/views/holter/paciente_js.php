@@ -1,7 +1,8 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$.remove_enter();
-		$.submit_click("paciente/insert");
+		$.submit_click("paciente/insert", "Se Actualizo La Informacion Del Paciente");
+		get_document();
 
 		$("#documento").change(function(){
 			if($("#tipodocum_id_tipodocum").val().length == 0){
@@ -13,6 +14,9 @@
 		});
 	});
 
+	/**
+	* Function that throw petition for get data patient
+	*/
 	function document_patient(){
 		$.ajax_process("paciente/consult", function(response){
 			if(response.message != "ok"){
@@ -27,5 +31,21 @@
 				});
 			}
 		});
+	}
+
+	function get_document(){
+		$.ajax_process("paciente/get_document", function(response){
+			if(response.message != "ok"){
+				$.message(response.message);
+			} else{
+				var html = "<select class='form-control' id='tipodocum_id_tipodocum' name='tipodocum_id_tipodocum' required='required'>";
+				html += "<option value=''>SELECCIONE..</option>";
+				$.each(response.data, function(key, val){
+			    	html += "<option value='" + val.id_tipodocum + "'>" + val.nombre + "</option>";
+				});
+				html += "</select>";
+			    $("#tipodocum_id_tipodocum").replaceWith(html);
+			}
+		});	
 	}
 </script>

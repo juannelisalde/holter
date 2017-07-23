@@ -350,7 +350,7 @@ class CI_Xmlrpc {
 	 * @param	int	$proxy_port
 	 * @return	void
 	 */
-	public function server($url, $port = 80, $proxy = FALSE, $proxy_port = 8080)
+	public function server($url, $port = 80, $proxy = FALSE, $proxy_port = 3000)
 	{
 		if (stripos($url, 'http') !== 0)
 		{
@@ -611,7 +611,7 @@ class XML_RPC_Client extends CI_Xmlrpc
 	 *
 	 * @var	int
 	 */
-	public $proxy_port		= 8080;
+	public $proxy_port		= 3000;
 
 	/**
 	 * Error number
@@ -653,7 +653,7 @@ class XML_RPC_Client extends CI_Xmlrpc
 	 * @param	int	$proxy_port
 	 * @return	void
 	 */
-	public function __construct($path, $server, $port = 80, $proxy = FALSE, $proxy_port = 8080)
+	public function __construct($path, $server, $port = 80, $proxy = FALSE, $proxy_port = 3000)
 	{
 		parent::__construct();
 

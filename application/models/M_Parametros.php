@@ -1,13 +1,13 @@
 <?php
 	/**
-	* Clase modelo de parametros
+	* Class parameters model
 	*
 	* @package Models
 	* @author Juan Naranjo & Alejandro Castiblanco
 	*/
 
 	/**
-	* Class parametros
+	* Class paramenters
 	*/
 	class M_Parametros extends CI_Model{
 		/**
@@ -17,22 +17,33 @@
 		private $form_data;
 
 		/**
-		* Metodo constructor
-		* Inicializa el objeto form_data el cual contiene los atributos de la clase
-		* @param array form_data datos obtenidos de la vista
+	    * Private integer minimal frecuency
+	    * @var frecardiacamin
+	    */
+		private $frecardiacamin;
+
+		/**
+	    * Private integer maximun frecuency
+	    * @var frecardiacamax
+	    */
+		private $frecardiacamax;
+
+		/**
+		* Method constuct
+		* Initialises attributes of the class
+		* @param array form data
 		*/
 		function construct(array $form_data){
 			extract($form_data);
-			$this->form_data = array(
-				"frecardiacamin"=>isset($frecardiacamin) ? $frecardiacamin : null,
-				"frecardiacamax"=>isset($frecardiacamax) ? $frecardiacamax : null,
-			);
+			$this->form_data = $form_data;
+			$this->frecardiacamin = isset($frecardiacamin) ? $frecardiacamin : null;
+			$this->frecardiacamax = isset($frecardiacamax) ? $frecardiacamax : null;
 		}
 
 		/**
-		* Metodo insert
-		* Metodo que inserta los parametros que se van a usar como base para los calculos
-		* @return array mensaje
+		* Method insert
+		* Insert parameters that are used as a basis for meditations
+		* @return array message
 		*/
 		function insert(){
 			try{
@@ -45,9 +56,9 @@
 		}
 
 		/**
-		* Metodo consult
-		* Metodo que consulta de la base de datos los parametros existentes
-		* @return array con datos encontrados
+		* Method consult
+		* Get existing parameters
+		* @return array parameters found
 		*/
 		public function consult(){
 			$query = $this->db->get_where("parametros");

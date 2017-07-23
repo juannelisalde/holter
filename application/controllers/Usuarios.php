@@ -51,5 +51,10 @@
 			$response = $this->M_Usuarios->insert($_POST);
 			die(json_encode($response));
 		}
+
+		public function recover_pass(){
+			$response = $this->M_Usuarios->recover_pass($_POST);
+			die(json_encode($response));	
+		}
 	}
 ?>

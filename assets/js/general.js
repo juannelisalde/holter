@@ -1,29 +1,9 @@
-/*
-$(document).ready(function() {
-	// Inicializando selects
-  $('select').material_select();
-  $("select[required]").css({display: "inline", height: 0, padding: 0, width: 0});
-
-  // Inicializando picker para fecha
-  $('.datepicker').pickadate({
-    selectMonths: true, // Creates a dropdown to control month
-    selectYears: 100, // Creates a dropdown of 15 years to control year
-    format: 'yyyy-mm-dd'
-  });
-  // Inicializando tooltips
-  $('.tooltipped').tooltip({delay: 50});
-  // Proporciones de contenido main
-
-  var marg = 20;
-  $(".main").css("max-height",$(window).height()-$("nav").height()-marg);
-
-	$(window).resize(function() {
-	  $(".main").css("max-height",$(window).height()-$("nav").height()-marg);
-	});
-});
-*/
-
 (function($){
+  /**
+  * Function that precess petition
+  * @param string controller to open
+  * @callback function
+  */
   $.ajax_process = function(open, callback){
     var url = "/CI/" + open;
     $.ajax({
@@ -38,7 +18,7 @@ $(document).ready(function() {
         callback(response);
       },
       error : function(xhr, status, textResponse) {
-        //$.message("error", "Se Produjo");
+        $.message("Ocurrio Un Error");
         console.log("error en la peticion : " + textResponse);
       },
       complete : function(xhr, status) {
@@ -62,7 +42,7 @@ $(document).ready(function() {
   }
 
   /**
-  * Method that get form data
+  * Method that get and return form data
   * @return object form data
   */
   $.obj_form_data = function(){
@@ -81,24 +61,28 @@ $(document).ready(function() {
 
   /**
   * Method that control click in button submit 
-  * @controlator string directory 
-  * @file string file of the controlator
-  * @message string message to show if response is ok 
-  * @method method to execute
-  * @tbody_id array id tbody to extract data
+  * @param string controller to open
+  * @param string message to show when response is ok
   */
-  $.submit_click = function(open){
+  $.submit_click = function(open, message){
     $("form").submit(function(e) {
       event.preventDefault();
       $.ajax_process(open, function(response){
         if(response.message == "ok"){
-          //$.message("message",message);
-          //$("form")[0].reset();
-          console.log("llega submit", response);
+          if(message != "login"){
+            $.message(message);
+            $("form")[0].reset();
+          } else{
+            window.location.href = "usuarios";
+          }
         }else{
-          console.log("llega submit erro ", response);
+          $.message(response.message);
         }
       });
     });
+  }
+
+  $.message = function(message){
+    alert(message);
   }
 })($)

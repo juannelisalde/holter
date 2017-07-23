@@ -50,5 +50,13 @@
 			$response = $this->M_Paciente->insert();
 			die(json_encode($response));
 		}
+
+		public function get_document(){
+			$response = $this->M_Paciente->get_document();
+			if(count($response) == 0){
+				die(json_encode(array("message"=>"No Se Ha Creado Documento")));
+			}
+			die(json_encode(array("message"=>"ok","data"=>$response)));	
+		}
 	}
 ?>

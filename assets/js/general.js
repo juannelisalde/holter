@@ -69,11 +69,13 @@
       event.preventDefault();
       $.ajax_process(open, function(response){
         if(response.message == "ok"){
-          if(message != "login"){
+          if(message == "login"){
+            window.location.href = "login";
+          } else if(message == "home"){
+            window.location.href = "home";
+          } else{
             $.message(message);
             $("form")[0].reset();
-          } else{
-            window.location.href = "usuarios";
           }
         }else{
           $.message(response.message);

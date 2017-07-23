@@ -1,7 +1,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$.remove_enter();
-		$.submit_click("paciente/insert", "Se Actualizo La Informacion Del Paciente");
+		$.submit_click("holter/paciente/insert", "Se Actualizo La Informacion Del Paciente");
 		get_document();
 
 		$("#documento").change(function(){
@@ -18,7 +18,7 @@
 	* Function that throw petition for get data patient
 	*/
 	function document_patient(){
-		$.ajax_process("paciente/consult", function(response){
+		$.ajax_process("holter/paciente/consult", function(response){
 			if(response.message != "ok"){
 				var document_patient = $("#documento").val();
 				var type_document = $("#tipodocum_id_tipodocum").val();
@@ -34,7 +34,7 @@
 	}
 
 	function get_document(){
-		$.ajax_process("paciente/get_document", function(response){
+		$.ajax_process("holter/paciente/get_document", function(response){
 			if(response.message != "ok"){
 				$.message(response.message);
 			} else{

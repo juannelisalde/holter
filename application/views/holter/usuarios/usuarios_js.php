@@ -1,6 +1,6 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$.remove_enter();
-		$.submit_click("parametros/insert", "Se Creo Un Nuevo Parametro De Medicion");
+		$.submit_click("holter/usuarios/insert", "Se Actualizo La Informacion Del Usuario");
 	});
 </script>

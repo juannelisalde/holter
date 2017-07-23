@@ -1,6 +1,6 @@
 <?php
 	/**
-	* Clase contralador home
+	* Class home controlator
 	*
 	* @package Controllers
 	* @author Juan Naranjo & Alejandro Castiblanco
@@ -8,12 +8,11 @@
 
 	/**
 	* Class home
-	* Muestra la vista que se debe mostrar inicialmente
+	* Show view by default
 	*/
 	class home extends CI_Controller{
 		public function index(){
-			$data["titulo"] = "login";
-			$this->load->view("holter/usuarios");
+			$this->load->view("holter/usuarios/usuarios");
 		}
 	}
 ?>

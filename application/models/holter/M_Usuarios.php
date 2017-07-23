@@ -110,6 +110,11 @@
 			return $query->result();
 		}
 
+		/**
+		* Method recover_pass
+		* Set pass user
+		* @return array message
+		*/
 		public function recover_pass(){
 			$query = $this->db->get_where("usuarios",array("email"=>$this->email));
 			$result = $query->result();

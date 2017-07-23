@@ -17,8 +17,9 @@
 		*/
 		public function __construct(){
 			parent::__construct();
-			$this->load->model("M_Usuarios");
-			$this->M_Usuarios->construct($_POST);
+			$this->load->library('functions');
+			$this->load->model("holter/M_Usuarios");
+			$this->M_Usuarios->construct($this->input->post());
 		}
 
 		/**
@@ -26,8 +27,8 @@
 		* Load recover password views
 		*/
 		public function index(){
-			$this->load->view("holter/recuperar_pass");
-			$this->load->view("holter/recuperar_pass_js");
+			$this->load->view("holter/recuperar_pass/recuperar_pass");
+			$this->load->view("holter/recuperar_pass/recuperar_pass_js");
 		}
 	}
 ?>

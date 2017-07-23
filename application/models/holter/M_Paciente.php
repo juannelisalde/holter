@@ -114,6 +114,11 @@
 			return $query->result();
 		}
 
+		/**
+		* Method get_document
+		* Get existing documents
+		* @return array documents found
+		*/
 		public function get_document(){
 			$query = $this->db->get_where("tipodocum");
 			return $query->result();

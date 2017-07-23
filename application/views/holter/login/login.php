@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Parametros</title>
+		<title>Login</title>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>/assets/bootstrap/tether/dist/css/tether.min.css">
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>/assets/bootstrap/css/bootstrap.min.css">
 	</head>
@@ -10,7 +10,7 @@
 		<form autocomplete="off">
 			<div class="container">
 				<div class="card">
-					<div class="card-header">Parametros</div>
+					<div class="card-header">Login</div>
 					<div class="card-block">
 						<div class="form-group">
 							<label for="email">Correo</label>

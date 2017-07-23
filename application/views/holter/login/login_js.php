@@ -1,7 +1,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$.remove_enter();
-		$.submit_click("usuarios/consult", "login");
+		$.submit_click("holter/login/login", "home");
 
 		$("#email").change(function(){
 			email();
@@ -52,7 +52,7 @@
 	* Function that throw petition for get data patient
 	*/
 	function email(){
-		$.ajax_process("usuarios/consult", function(response){
+		$.ajax_process("holter/usuarios/consult", function(response){
 			if(response.message != "ok"){
 				$("#email").val("");
 				$.message(response.message);
@@ -66,11 +66,11 @@
 			return false;
 		}
 
-		window.location.href = "recuperar_pass?email=juan.n.elisalde@gmail.com";
-
-		$.ajax_process("login/send_email", function(response){
+		$.ajax_process("holter/login/send_email", function(response){
 			if(response.message != "ok"){
 				$.message(response.message);
+			} else{
+				$.message("Se Envio Correo");
 			}
 		});	
 	}

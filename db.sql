@@ -18,7 +18,7 @@ create table usuarios(
 	apellidos varchar(100) not null,
 	email varchar(100) not null,
 	pass varchar(40) not null,
-	TIPO_USUARIO SET('ADMIN','USER') DEFAULT 'USER' NOT NULL,
+	tipo_usuario SET('ADMIN','USER') DEFAULT 'USER' NOT NULL,
 	creacion_usuario datetime not null,
 	modificacion_usuario datetime null,
 	constraint pk_usuarios_id_usuario primary key (id_usuario),

@@ -17,15 +17,9 @@
 		*/
 		public function __construct(){
 			parent::__construct();
-
-			//$this->session->sess_destroy();
-
-			if($this->session->id_usuario == null){
-				//redirect("holter/home");
-			}
-
 			$this->load->library('functions');
-			$this->load->model("holter/M_Usuarios");
+			$this->functions->validate_session();
+			$this->load->model("M_Usuarios");
 			$this->M_Usuarios->construct($this->input->post());
 		}
 
@@ -34,8 +28,8 @@
 		* Load and show views users
 		*/
 		public function index(){
-			$this->load->view("holter/usuarios/usuarios");
-			$this->load->view("holter/usuarios/usuarios_js");
+			$this->load->view("usuarios/usuarios");
+			$this->load->view("usuarios/usuarios_js");
 		}
 
 		/**

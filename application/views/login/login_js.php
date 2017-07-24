@@ -1,7 +1,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$.remove_enter();
-		$.submit_click("holter/login/login", "home");
+		$.submit_click("login/login", "home");
 
 		$("#email").change(function(){
 			email();
@@ -52,7 +52,7 @@
 	* Function that throw petition for get data patient
 	*/
 	function email(){
-		$.ajax_process("holter/usuarios/consult", function(response){
+		$.ajax_process("login/user", function(response){
 			if(response.message != "ok"){
 				$("#email").val("");
 				$.message(response.message);
@@ -66,7 +66,7 @@
 			return false;
 		}
 
-		$.ajax_process("holter/login/send_email", function(response){
+		$.ajax_process("login/send_email", function(response){
 			if(response.message != "ok"){
 				$.message(response.message);
 			} else{

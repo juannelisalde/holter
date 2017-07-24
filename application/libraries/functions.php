@@ -11,6 +11,20 @@
 	* Class functions
 	*/
 	class Functions {
+		/**
+	    * Private object CI
+	    * @var CI
+	    */
+    	private $CI;
+
+    	/**
+		* Method construct 
+		* Initializes librarie email
+		*/
+    	public function __construct() {
+    		$this->CI =& get_instance();
+        }
+
         /**
 		* method validate_fields
 		* Validate fields of form data in controller
@@ -89,6 +103,18 @@
 		*/
 		public function message_json($message){
 			die(json_encode($message));
+		}
+
+		public function validate_session(){
+			//$this->CI->session->sess_destroy();
+			if($this->CI->session->tipo_usuario != "ADMIN"){  
+				if($this->CI->session->temp == null){
+					$this->CI->session->unset_userdata("temp");
+					redirect("login"); 
+				}
+			}
+
+			$this->CI->session->unset_userdata("temp");
 		}
 	}
 ?>

@@ -17,13 +17,9 @@
 		*/
 		public function __construct(){
 			parent::__construct();
-
-			if($this->session->id_usuario == null){
-				//redirect("holter/home");
-			}
-
 			$this->load->library('functions');
-			$this->load->model("holter/M_Paciente");
+			$this->functions->validate_session();
+			$this->load->model("M_Paciente");
 			$this->M_Paciente->construct($this->input->post());
 		}
 
@@ -32,8 +28,8 @@
 		* Load and show views patients
 		*/
 		public function index(){
-			$this->load->view("holter/paciente/paciente");
-			$this->load->view("holter/paciente/paciente_js");
+			$this->load->view("paciente/paciente");
+			$this->load->view("paciente/paciente_js");
 		}
 
 		/**

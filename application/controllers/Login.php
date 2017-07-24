@@ -19,7 +19,7 @@
 			parent::__construct();
 			$this->load->library('send_email');
 			$this->load->library('functions');
-			$this->load->model("holter/M_Usuarios");
+			$this->load->model("M_Usuarios");
 			$this->M_Usuarios->construct($this->input->post());
 		}
 
@@ -28,8 +28,8 @@
 		* Load and show views login
 		*/
 		public function index(){
-			$this->load->view("holter/login/login");
-			$this->load->view("holter/login/login_js");
+			$this->load->view("login/login");
+			$this->load->view("login/login_js");
 		}
 
 		/**
@@ -70,6 +70,35 @@
 			);
 			$this->session->set_userdata($user);
 			$this->functions->message_json(array("message"=>"ok","data"=>$response));
+		}
+
+		/**
+		* Method login
+		* Validate if user exists and initializes session
+		*/
+		public function user(){
+			$fields = array(
+				array(
+					"email",
+				),
+				array(
+					"Correo",
+				),
+				array(
+					"email",
+				),
+			);
+			$response = $this->functions->validate_fields($fields, $this->input->post());
+			if($response["message"] != "ok"){
+				$this->functions->message_json($response);
+			}
+
+			$response = $this->M_Usuarios->consult($this->input->post());
+			if(count($response) == 0){
+				$this->functions->message_json(array("message"=>"No Existe Usuario"));
+			}
+			
+			$this->functions->message_json(array("message"=>"ok"));
 		}
 
 		/**

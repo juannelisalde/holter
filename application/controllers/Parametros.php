@@ -19,11 +19,11 @@
 			parent::__construct();
 
 			if($this->session->id_usuario == null || $this->session->tipo_usuario != "ADMIN"){
-				//redirect("holter/home");
+				redirect("login");
 			}
 
 			$this->load->library('functions');
-			$this->load->model("holter/M_Parametros");
+			$this->load->model("M_Parametros");
 			$this->M_Parametros->construct($this->input->post());
 		}
 
@@ -32,8 +32,8 @@
 		* Load and show views users
 		*/
 		public function index(){
-			$this->load->view("holter/parametros/parametros");
-			$this->load->view("holter/parametros/parametros_js");
+			$this->load->view("parametros/parametros");
+			$this->load->view("parametros/parametros_js");
 		}
 
 		/**

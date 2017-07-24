@@ -86,3 +86,7 @@ INSERT INTO tipodocum (nombre, sigla, descripcion) VALUES
 ("CEDULA", "CC", "CEDULA"),
 ("TARJETA DE IDENTIDAD", "TI", "TARJETA DE IDENTIDAD"),
 ("TARJETA EXTRAJERA", "TE", "TARJETA EXTRAJERA");
+
+
+insert into usuarios(nombres,apellidos,email,pass,tipo_usuario,creacion_usuario,modificacion_usuario) VALUES
+("ADMIN","ADMIN",email,pass,tipo_usuario,creacion_usuario,modificacion_usuario)

@@ -18,7 +18,7 @@
 	* Function that throw petition for get data patient
 	*/
 	function document_patient(){
-		$.ajax_process("detallepedi_estadetped_idpaciente/consult", function(response){
+		$.ajax_process("paciente/consult", function(response){
 			if(response.message != "ok"){
 				var document_patient = $("#documento").val();
 				var type_document = $("#tipodocum_id_tipodocum").val();
@@ -34,7 +34,7 @@
 	}
 
 	function get_document(){
-		$.ajax_process("detallepedi_estadetped_idpaciente/get_document", function(response){
+		$.ajax_process("paciente/get_document", function(response){
 			if(response.message != "ok"){
 				$.message(response.message);
 			} else{

@@ -68,8 +68,10 @@
 			}
 
 			try{
+				$this->db->trans_start();
 				$this->db->set('creacion_usuario', 'NOW()', FALSE);
 				$this->db->insert('usuarios', $this->form_data);
+				$this->db->trans_complete();
 				return array("message"=>"ok");
 			} catch (Exception  $e){
 				return array("message"=>"error");
@@ -83,9 +85,11 @@
 		*/
 		public function update(){
 			try{
+				$this->db->trans_start();
 				$this->db->set('modificacion_usuario', 'NOW()', FALSE);
 				$this->db->where(array("id_usuario"=>$this->id_usuario));
 		        $this->db->update("usuarios", $this->form_data);
+		        $this->db->trans_complete();
 				return array("message"=>"ok");
 			} catch (Exception  $e){
 				return(array("message"=>"error: $e"));
@@ -123,10 +127,12 @@
 			}
 
 			try{
+				$this->db->trans_start();
 				$this->db->set('modificacion_usuario', 'NOW()', FALSE);
 				$this->db->set(array("pass"=>$this->pass));
 				$this->db->where('email', $this->email);
 				$this->db->update('usuarios');
+				$this->db->trans_complete();
 			return array("message"=>"ok");
 			} catch (Exception  $e){
 				return(array("message"=>"error: $e"));

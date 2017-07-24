@@ -47,8 +47,10 @@
 		*/
 		function insert(){
 			try{
+				$this->db->trans_start();
 				$this->db->set('fecha_creacion', 'NOW()', FALSE);
 				$this->db->insert('parametros', $this->form_data);
+				$this->db->trans_complete();
 				return array("message"=>"ok");
 			} catch (Exception  $e){
 				return array("message"=>"error");

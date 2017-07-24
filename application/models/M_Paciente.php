@@ -74,7 +74,9 @@
 			}
 
 			try{
+				$this->db->trans_start();
 				$this->db->insert('paciente', $this->form_data);
+				$this->db->trans_complete();
 				return array("message"=>"ok");
 			} catch (Exception  $e){
 				return array("message"=>"error");
@@ -88,8 +90,10 @@
 		*/
 		public function update(){
 			try{
+				$this->db->trans_start();
 				$this->db->where(array("id_paciente"=>$this->id_paciente));
         		$this->db->update("paciente", $this->form_data);
+        		$this->db->trans_complete();
 				return array("message"=>"ok");
 			} catch (Exception  $e){
 				return(array("message"=>"error: $e"));

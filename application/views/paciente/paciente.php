@@ -65,7 +65,7 @@
 							<input type="text" class="form-control" placeholder="Dirección" name="direccion" id="direccion" required="required">
 						</div>
 
-						<button type="submit" class="btn btn-primary">Guardar</button>						
+						<button type="submit" class="btn btn-primary">Guardar</button>
 					</div>
 				</div>
 			</div>

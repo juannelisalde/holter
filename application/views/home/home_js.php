@@ -8,7 +8,7 @@
 	});
 
 	/**
-	* Function that throw petition for get data patient
+	* Function that throw patition for validate excel
 	*/
 	function excel(){
 		var formData = new FormData();
@@ -18,8 +18,8 @@
     		url: "/CI/home/excel",
 			type : 'POST',
 			data : formData,
-			processData: false,  // tell jQuery not to process the data
-			contentType: false,  // tell jQuery not to set contentType
+			processData: false,
+			contentType: false,
 			success : function(response){
         		console.log(response);
       		},

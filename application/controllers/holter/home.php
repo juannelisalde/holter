@@ -12,7 +12,7 @@
 	*/
 	class home extends CI_Controller{
 		public function index(){
-			$this->load->view("holter/usuarios/usuarios");
+			$this->load->view("holter/home/home");
 		}
 	}
 ?>

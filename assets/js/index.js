@@ -7,7 +7,7 @@
  * @returns	{Number}			El valor mas próximo.
  */
 
-// testsss
+// 
 
 function redondear(num, fact, op){
  var resto = num % fact, bool = (op)? (resto < fact && resto > 0) : op;

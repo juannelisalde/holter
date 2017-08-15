@@ -2,7 +2,7 @@
   /**
   * Function that precess petition
   * @param string controller to open
-  * @callback function
+  * @callback function hola
   */
   $.ajax_process = function(open, callback){
     var url = "/CI/" + open;

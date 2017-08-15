@@ -11,6 +11,7 @@ CREATE TABLE PARAMETROS(
 	CONSTRAINT PK_PARAMETROS_ID_PARAMETRO PRIMARY KEY (ID_PARAMETRO)
 ) COMMENT='Historial de datos simulados de la frecuencia mínima y máxima Holter del paciente';
 
+<<<<<<< HEAD
 CREATE TABLE USUARIOS(
 	ID_USUARIO INT NOT NULL AUTO_INCREMENT,
 	NOMBRES VARCHAR(100) NOT NULL,
@@ -33,6 +34,28 @@ CREATE TABLE TIPODOCUM (
 	CONSTRAINT UK_TIPODOCUM_NOMBRE UNIQUE (NOMBRE),
 	CONSTRAINT UK_TIPODOCUM_SIGLA UNIQUE (SIGLA)
 ) COMMENT='Contiene los diferentes tipos de documentos por personas';
+=======
+create table parametros(
+	id_parametro int not null auto_increment,
+	frecardiacamin int unsigned not null,
+	frecardiacamax int unsigned not null,
+	fecha_creacion datetime null,
+	constraint pk_parametros_id_parametro primary key (id_parametro)
+) comment='historial de datos simulados de la frecuencia mínima y máxima holter del paciente';
+
+create table usuarios(
+	id_usuario int not null auto_increment,
+	nombres varchar(100) not null,
+	apellidos varchar(100) not null,
+	email varchar(100) not null,
+	pass varchar(40) not null,
+	tipo_usuario SET('ADMIN','USER') DEFAULT 'USER' NOT NULL,
+	creacion_usuario datetime not null,
+	modificacion_usuario datetime null,
+	constraint pk_usuarios_id_usuario primary key (id_usuario),
+	constraint uk_usuarios_email unique (email)
+) comment='contiene los usuarios que se loguean al sistema';
+>>>>>>> 8a135896f6469dc62adeaaca64ffe3743f4788be
 
 CREATE TABLE PACIENTE(
 	ID_PACIENTE INT NOT NULL AUTO_INCREMENT,
@@ -78,3 +101,14 @@ CREATE TABLE MEDICIONPACIENTE(
 
 
 
+<<<<<<< HEAD
+=======
+INSERT INTO tipodocum (nombre, sigla, descripcion) VALUES
+("CEDULA", "CC", "CEDULA"),
+("TARJETA DE IDENTIDAD", "TI", "TARJETA DE IDENTIDAD"),
+("TARJETA EXTRAJERA", "TE", "TARJETA EXTRAJERA");
+
+
+insert into usuarios(nombres,apellidos,email,pass,tipo_usuario,creacion_usuario,modificacion_usuario) VALUES
+("ADMIN","ADMIN",email,pass,tipo_usuario,creacion_usuario,modificacion_usuario)
+>>>>>>> 8a135896f6469dc62adeaaca64ffe3743f4788be

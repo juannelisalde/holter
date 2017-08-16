@@ -1,5 +1,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
+		var Conf = {max:180, min:40, step: 5, step2: 10, no: 5000, noInp: 21};
+		chartHolter(Conf);
 		$("#excel").change(function(){
 			excel();
 		});

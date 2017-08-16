@@ -19,29 +19,27 @@
 }
 
 #char-holter {
-  	min-height: 800px !important;
-  	height: 800px !important;
-  	min-width: 1000px !important;
-  	width: 100% !important;
+	min-height: 800px !important;
+	height: 800px !important;
+	min-width: 1000px !important;
+	width: 100% !important;
 }
 
 #char-holter-10 {
-  	min-height: 400px !important;
-  	height: 400px !important;
-  	min-width: 580px !important;
-  	width: 100% !important;
+	min-height: 400px !important;
+	height: 400px !important;
+	min-width: 580px !important;
+	width: 100% !important;
 }
 
 .fixed{
 	position: fixed;
 	z-index: 999;
 	opacity: 0.2;
-    filter: Alpha(opacity=52);
-	/*background: white;*/
+  filter: Alpha(opacity=52);
 }
 
 .fixed:hover{
 	opacity: 1;
-    filter: Alpha(opacity=100);
-	/*background: white;*/
+  filter: Alpha(opacity=100);
 }

@@ -14,12 +14,17 @@
 					<div class="card-block">
 						<div class="form-group">
 							<label for="frecardiacamin">Frecuencia Minima</label>
-							<input type="number" class="form-control" placeholder="Frecuencia Minima" name="frecardiacamin" id="frecardiacamin" required="required" min="0">
+							<input type="number" class="form-control" placeholder="Frecuencia Minima" name="frecardiacamin" id="frecardiacamin" required="required" min="0" max="40">
 						</div>
 
 						<div class="form-group">
 							<label for="frecardiacamax">Frecuencia Maxima</label>
-							<input type="number" class="form-control" placeholder="Frecuencia Maxima" name="frecardiacamax" id="frecardiacamax" required="required" min="0">
+							<input type="number" class="form-control" placeholder="Frecuencia Maxima" name="frecardiacamax" id="frecardiacamax" required="required" min="0" max="180">
+						</div>
+
+						<div class="form-group">
+							<label for="cantidadmediciones">Mediciones</label>
+							<input type="number" class="form-control" placeholder="Mediciones" name="cantidadmediciones" id="cantidadmediciones" required="required" min="0" max="24"> 
 						</div>
 						
 						<button type="submit" class="btn btn-primary">Guardar</button>						

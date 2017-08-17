@@ -25,14 +25,16 @@
 			parent::__construct();
 			$this->load->library('functions');
 			$this->functions->validate_session();
+			$this->load->model("M_Parametros");
 		}
 		/**
 		* Method index
 		* Load and show views login
 		*/
 		public function index(){
+			$parameters = $this->M_Parametros->get_parameters();
 			$this->load->view("home/home");
-			$this->load->view("home/home_js");
+			$this->load->view("home/home_js", (array)$parameters[0]);
 		}
 
 		/**

@@ -29,6 +29,12 @@
 		private $frecardiacamax;
 
 		/**
+	    * Private integer maximun number row
+	    * @var cantidadmediciones
+	    */
+		private $cantidadmediciones;
+
+		/**
 		* Method constuct
 		* Initialises attributes of the class
 		* @param array form data
@@ -38,6 +44,7 @@
 			$this->form_data = $form_data;
 			$this->frecardiacamin = isset($frecardiacamin) ? $frecardiacamin : null;
 			$this->frecardiacamax = isset($frecardiacamax) ? $frecardiacamax : null;
+			$this->cantidadmediciones = isset($cantidadmediciones) ? $cantidadmediciones : null;
 		}
 
 		/**
@@ -63,7 +70,21 @@
 		* @return array parameters found
 		*/
 		public function consult(){
-			$query = $this->db->get_where("parametros");
+			$this->db->from("parametros");
+			$query = $this->db->get();
+			return $query->result();
+		}
+
+		/**
+		* Method get parameters
+		* Get last parameters register
+		* @return array last parameter
+		*/
+		public function get_parameters(){
+			$this->db->from("parametros");
+			$this->db->limit(1);
+			$this->db->order_by("id_parametro DESC");
+			$query =  $this->db->get();
 			return $query->result();
 		}
 	}

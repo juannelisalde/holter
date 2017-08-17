@@ -1,6 +1,10 @@
 <script type="text/javascript">
+	var fmax = <?php echo $frecardiacamax;?>;
+	var fmin = <?php echo $frecardiacamin;?>;
+	var rows = <?php echo $cantidadmediciones;?>;
+
 	$(document).ready(function(){
-		var Conf = {max:180, min:40, step: 5, step2: 10, no: 5000, noInp: 21};
+		var Conf = {min:fmin, max:fmax, noInp: rows, step: 5, step2: 10, no: 5000};
 		chartHolter(Conf);
 		$("#excel").change(function(){
 			excel();
@@ -45,9 +49,9 @@
 
 				} else{
 					$.each(response.data, function(key, row){
-            $("#jqxgrid").jqxGrid('setcellvalue', key, 'FMin', row[0]);
-            $("#jqxgrid").jqxGrid('setcellvalue', key, 'FMax', row[1]);
-            $("#jqxgrid").jqxGrid('setcellvalue', key, 'Lathora', row[2]);
+            			$("#jqxgrid").jqxGrid('setcellvalue', key, 'FMin', row[0]);
+            			$("#jqxgrid").jqxGrid('setcellvalue', key, 'FMax', row[1]);
+            			$("#jqxgrid").jqxGrid('setcellvalue', key, 'Lathora', row[2]);
 					});
 				}
       },

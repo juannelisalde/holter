@@ -8,63 +8,80 @@
 	</head>
 	<body>
 		<form autocomplete="off">
-			<div class="container">
-				<div class="card">
-					<div class="card-header">Paciente</div>
-					<div class="card-block">
-						<div class="form-group">
-							<label for="tipodocum_id_tipodocum">Tipo De Documento</label>
-							<input type="text" class="form-control" placeholder="Tipo De Documento" name="tipodocum_id_tipodocum" id="tipodocum_id_tipodocum" required="required">
+			<div class="container-fluid">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+					  <h3 class="panel-title"><i class="glyphicon glyphicon-star"></i> Paciente</h3>
+					</div>
+					<div class="panel-block container">
+						<div class="row">
+							<div class="form-group col-sm-6">
+								<label for="tipodocum_id_tipodocum">Tipo De Documento</label>
+								<input type="text" class="form-control" placeholder="Tipo De Documento" name="tipodocum_id_tipodocum" id="tipodocum_id_tipodocum" required="required">
+							</div>
+							<div class="form-group col-sm-6">
+								<label for="documento">Documento</label>
+								<input type="text" class="form-control" placeholder="Documento" name="documento" id="documento" required="required">
+							</div>
+						</div>
+						<div class="content-hidden">
+
+
 						</div>
 
-						<div class="form-group">
-							<label for="documento">Documento</label>
-							<input type="text" class="form-control" placeholder="Documento" name="documento" id="documento" required="required">
-						</div>
+							<div class="row">
+								<div class="form-group col-sm-6">
+									<label for="nombres">Nombres</label>
+									<input type="text" class="form-control" placeholder="Nombres" name="nombres" id="nombres" required="required">
+								</div>
+								
+								<div class="form-group col-sm-6">
+									<label for="apellidos">Apellidos</label>
+									<input type="text" class="form-control" placeholder="Apellidos" name="apellidos" id="apellidos" required="required">
+								</div>
+							</div>
 						
-						<div class="form-group">
-							<label for="nombres">Nombres</label>
-							<input type="text" class="form-control" placeholder="Nombres" name="nombres" id="nombres" required="required">
-						</div>
-						
-						<div class="form-group">
-							<label for="apellidos">Apellidos</label>
-							<input type="text" class="form-control" placeholder="Apellidos" name="apellidos" id="apellidos" required="required">
-						</div>
+							<div class="row">
+								<div class="form-group col-sm-6">
+									<label for="fecha_nacimiento">Fecha De Nacimiento</label>
+									<input type="date" class="form-control" placeholder="Fecha De Nacimiento" name="fecha_nacimiento" id="fecha_nacimiento" required="required">
+								</div>
 
-						<div class="form-group">
-							<label for="fecha_nacimiento">Fecha De Nacimiento</label>
-							<input type="date" class="form-control" placeholder="Fecha De Nacimiento" name="fecha_nacimiento" id="fecha_nacimiento" required="required">
-						</div>
+								<div class="form-group col-sm-6">
+									<label for="fecha_nacimiento">Género</label>
+									<select class="form-control" name="genero" id="genero" required="required">
+										<option value="M">Masculino</option>
+										<option value="F">Femenino</option>
+									</select>
+								</div>
+							</div>
 
-						<div class="form-group">
-							<label for="fecha_nacimiento">genero</label>
-							<select class="form-control" name="genero" id="genero" required="required">
-								<option value="M">Masculino</option>
-								<option value="F">Femenino</option>
-							</select>
-						</div>
+							<div class="row">
+								<div class="form-group col-sm-6">
+									<label for="telefono">Telefono</label>
+									<input type="text" class="form-control" placeholder="Telefono" name="telefono" id="telefono" required="required">
+								</div>
 
-						<div class="form-group">
-							<label for="telefono">Telefono</label>
-							<input type="text" class="form-control" placeholder="Telefono" name="telefono" id="telefono" required="required">
-						</div>
+								<div class="form-group col-sm-6">
+									<label for="celular">Celular</label>
+									<input type="text" class="form-control" placeholder="Celular" name="celular" id="celular" required="required">
+								</div>
+							</div>
 
-						<div class="form-group">
-							<label for="celular">Celular</label>
-							<input type="text" class="form-control" placeholder="Celular" name="celular" id="celular" required="required">
-						</div>
+							<div class="row">
 
-						<div class="form-group">
-							<label for="email">Email</label>
-							<input type="email" class="form-control" placeholder="Email" name="email" id="email" required="required">
-						</div>
-						
-						<div class="form-group">
-							<label for="direccion">Dirección</label>
-							<input type="text" class="form-control" placeholder="Dirección" name="direccion" id="direccion" required="required">
-						</div>
+								<div class="form-group">
+									<label for="email">Email</label>
+									<input type="email" class="form-control" placeholder="Email" name="email" id="email" required="required">
+								</div>
+								
+								<div class="form-group">
+									<label for="direccion">Dirección</label>
+									<input type="text" class="form-control" placeholder="Dirección" name="direccion" id="direccion" required="required">
+								</div>
 
+							</div>
+							
 						<button type="submit" class="btn btn-primary">Guardar</button>
 					</div>
 				</div>

@@ -129,7 +129,7 @@
 			$http = (strtoupper(substr($_SERVER["SERVER_PROTOCOL"],0,5)) == "HTTPS") ? "https" : "http";
 			$message = "Este Correo Es Para Recuperar La Contraseña, \n
 			Por favor 
-			<a href='" . $http . "://" . $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . "/CI/recuperar_pass?email=" . $this->input->post("email") . "'>Olvido Contraseña</a>";
+			<a href='" . $http . "://" . $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . "/git-holter/recuperar_pass?email=" . $this->input->post("email") . "'>Olvido Contraseña</a>";
 			
 			$this->send_email->send($this->input->post("email"), "Recuperar Contraseña", $message);
 			

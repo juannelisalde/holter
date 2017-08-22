@@ -5,7 +5,7 @@
   * @callback function hola
   */
   $.ajax_process = function(open, callback){
-    var url = "/CI/" + open;
+    var url = "/git-holter/" + open;
     $.ajax({
       url: url, 
       data : $.obj_form_data(),

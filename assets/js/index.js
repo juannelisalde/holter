@@ -205,10 +205,10 @@ chartHolter = function(Conf) {
                           if (value == "")
                           { return { result: false, message: "El campo no puede ser vacío" }; }
                           var val = parseInt(value);
-                          if ((val <= 0 || val >= Conf.max) && cell.column != "Lathora") 
+                          if ((val <= 0 || val > Conf.max) && cell.column != "Lathora") 
                               { return { result: false, message: "Digite un valor mayor a 0 y menor a "+Conf.max }; }
 
-                          if ((val <= 0 || val >= 10000) && cell.column == "Lathora") 
+                          if ((val <= 0 || val > 10000) && cell.column == "Lathora") 
                               { return { result: false, message: "Digite un valor mayor a 0 y menor a "+Conf.max }; }
 
                           return true;

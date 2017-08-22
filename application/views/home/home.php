@@ -27,7 +27,7 @@
       			<a href="paciente"><i class="glyphicon glyphicon-star"></i> Pacientes</a>
       		</li>
       		<li role="separator" class="divider"></li>
-          <li><a href="perfil.php">
+          <li><a href="usuarios">
           	<i class="glyphicon glyphicon-user"></i> Perfil</a>
           </li>
           <li>
@@ -46,7 +46,7 @@
           	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-user"></i>  {Nombre de usuario} <i class="glyphicon glyphicon-option-vertical"></i></a>
           	<ul class="dropdown-menu">
 	            <li>
-	            	<a href="perfil.php"><i class="glyphicon glyphicon-user"></i> Perfil</a>
+	            	<a href="usuarios"><i class="glyphicon glyphicon-user"></i> Perfil</a>
 	            </li>
 	            <li>
 	            	<a href="parametros"><i class="glyphicon glyphicon-cog"></i> Configuración de sistema</a>
@@ -137,7 +137,7 @@
 		        	<form>
 					  		<h4><i class="glyphicon glyphicon-search"></i> Consultar paciente</h4>
 		        	  <div class="form-group">
-							    <select class="form-control" name="tipo_documento" id="tipo_documento" required>
+							    <select class="form-control" name="tipodocum_id_tipodocum" id="tipodocum_id_tipodocum" required>
 									  <option>Escoge un Tipo de documento</option>
 									  <option value="TI">Tarjeta de identidad</option>
 									  <option value="CC">Cédula de ciudadania</option>
@@ -146,7 +146,7 @@
 									</select>
 							 	</div>
 							  <div class="form-group">
-							    <input type="text" class="form-control" name="doc_ident" id="doc_ident" placeholder="Documento de identidad" required>
+							    <input type="text" class="form-control" name="documento" id="documento" placeholder="Documento de identidad" required>
 							  </div>
 							  <div class="row">
 								  <div class="form-group col-sm-6">
@@ -190,6 +190,7 @@
 	<!-- Latest compiled and minified JavaScript -->
 	<script type="text/javascript" src="<?php echo base_url(); ?>/assets/bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>/assets/js/general-1.js"></script>
+	<script type="text/javascript" src="<?php echo base_url(); ?>/assets/js/general.js"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>/assets/js/index.js"></script>
 </body>
 </html>

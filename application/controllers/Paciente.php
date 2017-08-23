@@ -28,6 +28,7 @@
 		* Load and show views patients
 		*/
 		public function index(){
+			$this->load->view("header");
 			$this->load->view("paciente/paciente");
 			$this->load->view("paciente/paciente_js");
 		}

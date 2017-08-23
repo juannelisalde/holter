@@ -1,7 +1,7 @@
 <script type="text/javascript">
-	var fmax = <?php echo $frecardiacamax;?>;
-	var fmin = <?php echo $frecardiacamin;?>;
-	var rows = <?php echo $cantidadmediciones;?>;
+	var fmax = <?= $frecardiacamax;?>;
+	var fmin = <?= $frecardiacamin;?>;
+	var rows = <?= $cantidadmediciones;?>;
 
 	$(document).ready(function(){
 		//Cargar menú de tipos de documento
@@ -59,7 +59,7 @@
 		formData.append('file', $('#excel')[0].files[0]);
 		
 		$.ajax({
-	    url: "/git-holter/home/excel",
+	    url: "/CI/home/excel",
 			type : 'POST',
 			data : formData,
 			processData: false,

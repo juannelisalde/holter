@@ -28,6 +28,7 @@
 		* Load and show views users
 		*/
 		public function index(){
+			$this->load->view("header");
 			$this->load->view("usuarios/usuarios");
 			$this->load->view("usuarios/usuarios_js");
 		}

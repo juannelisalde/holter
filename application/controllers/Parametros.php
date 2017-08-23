@@ -32,6 +32,7 @@
 		* Load and show views users
 		*/
 		public function index(){
+			$this->load->view("header");
 			$this->load->view("parametros/parametros");
 			$this->load->view("parametros/parametros_js");
 		}

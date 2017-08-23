@@ -135,5 +135,13 @@
 			
 			$this->functions->message_json(array("message"=>"ok"));
 		}
+
+		/**
+		* Method that close session user
+		*/
+		public function sign_off(){
+			$this->session->sess_destroy();
+			redirect("login");
+		}
 	}
 ?>

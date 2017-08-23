@@ -35,7 +35,7 @@
 	          </li>
 	          <li role="separator" class="divider"></li>
 	          <li>
-	          	<a href="logout.php"><i class="glyphicon glyphicon-log-out"></i> Cerrar Sesión</a>
+	          	<a href="login/sign_off"><i class="glyphicon glyphicon-log-out"></i> Cerrar Sesión</a>
 	          </li>
 	        </ul>
 	        <ul class="nav navbar-nav navbar-right hidden-xs">
@@ -53,7 +53,7 @@
 		            </li>
 		            <li role="separator" class="divider"></li>
 		            <li>
-		            	<a href="logout.php"><i class="glyphicon glyphicon-log-out"></i> Cerrar Sesión</a>
+		            	<a href="login/sign_off"><i class="glyphicon glyphicon-log-out"></i> Cerrar Sesión</a>
 		            </li>
 	          	</ul>
 	        	</li>

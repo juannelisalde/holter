@@ -87,4 +87,4 @@ INSERT INTO usuarios (nombres, apellidos, email, pass, tipo_usuario, creacion_us
 ('ALEJANDRO', 'CASTIBLANCO', 'mc.alejo16@gmail.com', SHA1('1234'), 'ADMIN', NOW());
 
 INSERT INTO parametros (frecardiacamin, frecardiacamax, cantidadmediciones, fecha_creacion) VALUES 
-('40', '180', '21', NOW());
+('40', '180', '21', NOW());  

@@ -7,6 +7,8 @@
 			email();
 		});
 
+		$(".change_pass").click(send_email);
+
 		$(".modal-forget").click(function(e){
 			e.stopPropagation();
         	e.preventDefault();
@@ -59,6 +61,8 @@
 			}
 		});
 	}
+
+
 
 	function send_email(){
 		if($("#email").val().length == 0){

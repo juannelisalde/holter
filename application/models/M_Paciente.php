@@ -17,6 +17,12 @@
 		private $form_data;
 
 		/**
+	    * Private array form data
+	    * @var medition
+	    */
+		private $medition;
+
+		/**
 	    * Private integer patient id
 	    * @var id_paciente
 	    */
@@ -54,6 +60,20 @@
 				"email" => isset($email) ? $email : null,
 				"direccion" => isset($direccion) ? strtoupper($direccion) : null,
 			);
+
+			$this->meditions = array(
+			    "paciente_id_paciente"  => isset($paciente_id_paciente) ? $paciente_id_paciente : null,
+			    "parametros_id_parametro"  => isset($parametros_id_parametro) ? $parametros_id_parametro : null,
+			    "frecuencia_min"  => isset($frecuencia_min) ? $frecuencia_min : null,
+			    "frecuencia_max"  => isset($frecuencia_max) ? $frecuencia_max : null,
+			    "date_ini"  => isset($date_ini) ? $date_ini : 0,
+			    "time_ini"  => isset($time_ini) ? $time_ini : 0,
+
+			);
+
+			$this->meditions["fecha_inicio"] = $this->meditions["date_ini"]." ".$this->meditions["time_ini"];
+			unset($this->meditions["date_ini"]);
+			unset($this->meditions["time_ini"]);
 
 			$this->id_paciente = isset($id_paciente) ? $id_paciente : null;
 			$this->tipodocum_id_tipodocum = isset($tipodocum_id_tipodocum) ? $tipodocum_id_tipodocum : null;
@@ -126,6 +146,32 @@
 		public function get_document(){
 			$query = $this->db->get_where("tipodocum");
 			return $query->result();
+		}
+
+		/**
+		* Method save_meditation
+		* Insert data patient meditation
+		* @return array message
+		*/
+		function save_meditation(){
+			$para = array("paciente_id_paciente"=>$this->meditions["paciente_id_paciente"], "fecha_inicio"=>$this->meditions["fecha_inicio"]);
+
+			$query = $this->db->get_where("medicionpaciente",$para);
+			$result = $query->result();
+
+			if(count($result) > 0){
+				return array("message"=>"La fecha de medición ya existe, por favor escoja otra fecha.");
+			}
+			
+			try{
+				$this->db->trans_start();
+				$this->db->set('fecha_registro', 'NOW()', FALSE);
+				$this->db->insert('medicionpaciente', $this->meditions);
+				$this->db->trans_complete();
+				return array("message"=>"ok");
+			} catch (Exception  $e){
+				return array("message"=>"error: $e");
+			}
 		}
 	}
 ?>

@@ -39,10 +39,10 @@ create table tipodocum (
 create table paciente(
 	id_paciente int not null auto_increment,
 	tipodocum_id_tipodocum int not null,
-	documento int not null,
+	documento varchar(15) not null,
 	nombres varchar(100) not null,
 	apellidos varchar(100) not null,
-	fecha_nacimiento datetime not null,
+	fecha_nacimiento date not null,
 	genero set('', 'M','F') default '' not null,
 	telefono varchar(100) not null,
 	celular varchar(100) not null,
@@ -54,26 +54,24 @@ create table paciente(
 ) comment='contiene los diferentes tipos de documentos usado entre empresas y personas';
 
 create table historiapaciente(
-	paciente_id_usuario int not null,
+	paciente_id_paciente int not null,
 	anomalia varchar(1000) not null,
 	creacion_usuario datetime not null,
 	modificacion_usuario datetime not null,
-	constraint fk_historiapaciente_paciente_id_usuario foreign key(paciente_id_usuario) references paciente(id_paciente)
+	constraint fk_historiapaciente_paciente_id_paciente foreign key(paciente_id_paciente) references paciente(id_paciente)
 ) comment='historia clínica del paciente';
 
 create table medicionpaciente(
 	id_medicionpaciente bigint not null auto_increment,
-	paciente_id_usuario int not null,
+	paciente_id_paciente int not null,
 	parametros_id_parametro int not null,
-	fecha_registro date not null,
 	frecuencia_min int not null,
 	frecuencia_max int not null,
-	total_puntos  int not null,
 	fecha_inicio datetime not null,
-	fecha_fin datetime not null,
+	fecha_registro datetime not null,
 	constraint pk_paciente_id_medicionpaciente primary key (id_medicionpaciente),
-	constraint uk_paciente_medicionpaciente unique (id_medicionpaciente),
-	constraint fk_medicionpaciente_paciente_id_usuario foreign key(paciente_id_usuario) references paciente(id_paciente),
+	constraint uk_paciente_medicionpaciente unique (paciente_id_paciente, fecha_inicio),
+	constraint fk_medicionpaciente_paciente_id_paciente foreign key(paciente_id_paciente) references paciente(id_paciente),
 	constraint fk_medicionpaciente_paciente_id_parametro foreign key(parametros_id_parametro) references parametros(id_parametro)
 ) comment='historial de mediciones de holter del paciente';
 
@@ -85,6 +83,10 @@ INSERT INTO tipodocum (nombre, sigla, descripcion) VALUES
 INSERT INTO usuarios (nombres, apellidos, email, pass, tipo_usuario, creacion_usuario) VALUES 
 ('JUAN', 'NARANJO', 'juan.n.elisalde@gmail.com', SHA1('1234'), 'ADMIN', '2017-08-17 00:00:00'),
 ('ALEJANDRO', 'CASTIBLANCO', 'mc.alejo16@gmail.com', SHA1('1234'), 'ADMIN', NOW());
+
+
+INSERT INTO paciente (tipodocum_id_tipodocum, documento, nombres, apellidos, fecha_nacimiento, genero, telefono, celular, email, direccion)
+VALUES (1, "1032454463", "ALEJANDRO", "CASTIBLANCO","1993-01-06", "M", "1234567", "3132122866", "mc.alejo15@gmail.com", "Cll 123 a bis sur # 78 - 22");
 
 INSERT INTO parametros (frecardiacamin, frecardiacamax, cantidadmediciones, fecha_creacion) VALUES 
 ('40', '180', '21', NOW());  

@@ -36,7 +36,7 @@
 			$parameters[0]->name = $this->session->userdata["nombres"];
 			$parameters[0]->lastname = $this->session->userdata["apellidos"];
 			$this->load->view("header");
-			$this->load->view("home/home");
+			$this->load->view("home/home", (array)$parameters[0]);
 			$this->load->view("home/home_js", (array)$parameters[0]);
 		}
 

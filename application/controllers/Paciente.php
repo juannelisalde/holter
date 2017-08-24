@@ -20,6 +20,7 @@
 			$this->load->library('functions');
 			$this->functions->validate_session();
 			$this->load->model("M_Paciente");
+			$this->load->model("M_Parametros");
 			$this->M_Paciente->construct($this->input->post());
 		}
 
@@ -28,9 +29,10 @@
 		* Load and show views patients
 		*/
 		public function index(){
+			$parameters = $this->M_Parametros->get_parameters();
 			$this->load->view("header");
 			$this->load->view("paciente/paciente");
-			$this->load->view("paciente/paciente_js");
+			$this->load->view("paciente/paciente_js", (array)$parameters[0]);
 		}
 
 		/**
@@ -107,6 +109,55 @@
 				$this->functions->message_json(array("message"=>"No Se Ha Creado Documento"));
 			}
 			$this->functions->message_json(array("message"=>"ok","data"=>$response));
+		}
+
+		/**
+		* Method save_meditation
+		* save information of user meditation
+		*/
+		public function save_meditation(){
+
+			//die();
+
+			$fields = array(
+				array(
+				    "paciente_id_paciente",
+				    "parametros_id_parametro",
+				    "frecuencia_min",
+				    "frecuencia_max",
+				    "date_ini",
+				    "time_ini",
+				),
+				array(
+				    "Paciente",
+				    "ID parámetro",
+				    "frecuencia mínima",
+				    "frecuencia máxima",
+				    "Fecha inicial",
+				    "Hora inicial",
+				),
+				array(
+					"integer",
+					"integer",
+					"integer",
+					"integer",
+					"varchar",
+					"varchar",
+				),
+			);
+
+
+			$response = $this->functions->validate_fields($fields, $this->input->post());
+			if($response["message"] != "ok"){
+				$this->functions->message_json($response);
+			}
+
+			$response = $this->M_Paciente->save_meditation();
+
+			$this->functions->message_json($response);
+
+			//extract($this->input->post());
+
 		}
 	}
 ?>

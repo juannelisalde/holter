@@ -1,18 +1,51 @@
 <script type="text/javascript">
+var fmax = <?= $frecardiacamax;?>;
+	var fmin = <?= $frecardiacamin;?>;
+	var rows = <?= $cantidadmediciones;?>;
+	
 	$(document).ready(function(){
+		var Conf = {min:fmin, max:fmax, noInp: rows, step: 5, step2: 10, no: 5000};
+		chartHolter(Conf);
+
 		$.remove_enter();
 		$.submit_click("paciente/insert", "Se Actualizo La Informacion Del Paciente");
 		get_document();
+
 
 		$("#documento").change(function(){
 			if($("#tipodocum_id_tipodocum").val().length == 0){
 				alert("Debe Seleccionar Tipo De Documento");
 				$(this).val("");
 			}else{
+				$("#tipodocum_id_tipodocum_head").val($("#tipodocum_id_tipodocum").val());
+				$("#documento_head").val($("#documento").val());
 				document_patient();
 			}
 		});
+
+		$("#documento_head").change(function(){
+			if($("#tipodocum_id_tipodocum_head").val().length == 0){
+				alert("Debe Seleccionar Tipo De Documento");
+				$(this).val("");
+			}else{
+				$("#tab_info_pat").click();
+				$("#tipodocum_id_tipodocum").val($("#tipodocum_id_tipodocum_head").val());
+				$("#documento").val($("#documento_head").val()).trigger("change");
+			}
+		});
+
+		$("#tipodocum_id_tipodocum_head").change(function(){
+			$("#tipodocum_id_tipodocum").val($(this).val());
+			$("#documento, #documento_head").val("");
+		});
+
+		$("#tipodocum_id_tipodocum").change(function(){
+			$("#tipodocum_id_tipodocum_head").val($(this).val());
+			$("#documento, #documento_head").val("");
+		});
+		
 	});
+
 
 	/**
 	* Function that throw petition for get data patient
@@ -22,7 +55,7 @@
 			if(response.message != "ok"){
 				var document_patient = $("#documento").val();
 				var type_document = $("#tipodocum_id_tipodocum").val();
-				$("form")[0].reset();
+				$("form")[1].reset();
 				$("#documento").val(document_patient);
 				$("#tipodocum_id_tipodocum").val(type_document);
 			} else{
@@ -33,18 +66,23 @@
 		});
 	}
 
+	var replaceHtmlTD = function(data, id){
+		var html = "<option value=''>Seleccione un tipo de documento..</option>";
+		$.each(data, function(key, val){
+	    	html += "<option value='" + val.id_tipodocum + "'>" + val.nombre + "</option>";
+		});
+		console.log(html);
+		return html;
+	} 
+
 	function get_document(){
 		$.ajax_process("paciente/get_document", function(response){
 			if(response.message != "ok"){
 				$.message(response.message);
 			} else{
-				var html = "<select class='form-control' id='tipodocum_id_tipodocum' name='tipodocum_id_tipodocum' required='required'>";
-				html += "<option value=''>SELECCIONE..</option>";
-				$.each(response.data, function(key, val){
-			    	html += "<option value='" + val.id_tipodocum + "'>" + val.nombre + "</option>";
-				});
-				html += "</select>";
-			    $("#tipodocum_id_tipodocum").replaceWith(html);
+				
+			    $("#tipodocum_id_tipodocum").html(replaceHtmlTD(response.data, "tipodocum_id_tipodocum"));
+			    $("#tipodocum_id_tipodocum_head").html(replaceHtmlTD(response.data, "tipodocum_id_tipodocum_head"));
 			}
 		});	
 	}

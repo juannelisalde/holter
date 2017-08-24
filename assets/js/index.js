@@ -174,71 +174,6 @@ var calculaResultado = function(LimitMax, min, max){
 //Carga de gráfica
 chartHolter = function(Conf) {
 
-	$("#fre_min").attr("min", Conf.min).attr("max", Conf.max);
-	$("#fre_max").attr("min", Conf.min).attr("max", Conf.max);
-
-	/*Jqwidget*/
-         $(document).ready(function () {
-             // renderer for grid cells.
-             var numberrenderer = function (row, column, value) {
-                 return '<div style="text-align: center; margin-top: 5px;">' + (1 + value) + '</div>';
-             }
-             // create Grid datafields and columns arrays.
-             var datafields = [];
-             var columns = [];
-             for (var i = 0; i < 3; i++) {
-                 var text = headTxt(i);
-                 var exportText = exportTxt(i);
-                 if (i == 0) {
-                     var cssclass = 'jqx-widget-header';
-                     if (theme != '') cssclass += ' jqx-widget-header-' + theme;
-                     columns[columns.length] = {pinned: true, exportable: false, text: "", columntype: 'number', cellclassname: cssclass, cellsrenderer: numberrenderer };
-                 }
-                 datafields[datafields.length] = { name: exportText, type: 'int' };
-                 columns[columns.length] = { 
-                 	text: exportText,
-                 	datafield: exportText,
-                 	width: 145,
-                 	align: 'center',
-                 	cellsalign: 'center',
-                    validation: function (cell, value) {
-                          if (value == "")
-                          { return { result: false, message: "El campo no puede ser vacío" }; }
-                          var val = parseInt(value);
-                          if ((val <= 0 || val > Conf.max) && cell.column != "Lathora") 
-                              { return { result: false, message: "Digite un valor mayor a 0 y menor a "+Conf.max }; }
-
-                          if ((val <= 0 || val > 10000) && cell.column == "Lathora") 
-                              { return { result: false, message: "Digite un valor mayor a 0 y menor a "+Conf.max }; }
-
-                          return true;
-                    }
-                  } 
-              };
-            //};
-	         var source =
-	            {
-	                unboundmode: true,
-	                totalrecords: Conf.noInp,
-	                datafields: datafields,
-	                updaterow: function (rowid, rowdata) {
-	                    // synchronize with the server - send update command   
-	                }
-	            };
-            var dataAdapter = new $.jqx.dataAdapter(source);
-             // initialize jqxGrid
-            $("#jqxgrid").jqxGrid(
-            {
-                width: 480,
-                source: dataAdapter,
-                editable: true,
-                theme: 'bootstrap',
-                columnsresize: true,
-                selectionmode: 'multiplecellsadvanced',
-                columns: columns
-            });
-        });
-/*Fin Jqwidget*/
 	
 	var chart = Highcharts.chart('char-holter', {
 	    title: {
@@ -275,20 +210,20 @@ chartHolter = function(Conf) {
 	        verticalAlign: 'middle'
 	    },
 	    series: [{
-	        name: 'Primera Toma',
+	        name: 'Toma de muestra',
 	        type: 'polygon',
 	        data: [],
 	        color: 'rgba(255, 206, 84, 0.7)',
 	        enableMouseTracking: true
 
-	    }, /*{
+	    }/*,{
 	        name: 'Frecuencia cardiaca',
 	        type: 'scatter',
 	        color: Highcharts.getOptions().colors[1],
 	        data: [],
 	        enableMouseTracking: true
 
-	    },*/ {
+	    }, {
 	        name: 'Segunda Toma',
 	        type: 'polygon',
 	        color: 'rgba(160, 212, 104, 0.7)',
@@ -303,7 +238,8 @@ chartHolter = function(Conf) {
 	        data: [],
 	        enableMouseTracking: true
 
-	    }],
+	    }*/
+	    ],
             plotOptions:{
                 series:{
                     turboThreshold:10000//larger threshold or set to 0 to disable
@@ -358,20 +294,20 @@ chartHolter = function(Conf) {
 	        verticalAlign: 'middle'
 	    },
 	    series: [{
-	        name: 'Primera Toma',
+	        name: 'Toma de muestra',
 	        type: 'polygon',
 	        data: [],
 	        color: 'rgba(255, 206, 84, 0.7)',
 	        enableMouseTracking: true
 
-	    }, /*{
+	    }/*,{
 	        name: 'Frecuencia cardiaca',
 	        type: 'scatter',
 	        color: Highcharts.getOptions().colors[1],
 	        data: [],
 	        enableMouseTracking: true
 
-	    },*/ {
+	    }, {
 	        name: 'Segunda Toma',
 	        type: 'polygon',
 	        color: 'rgba(160, 212, 104, 0.7)',
@@ -386,7 +322,9 @@ chartHolter = function(Conf) {
 	        data: [],
 	        enableMouseTracking: true
 
-	    }],
+	    }*/
+
+	    ],
             plotOptions:{
                 series:{
                     turboThreshold:10000//larger threshold or set to 0 to disable
@@ -428,6 +366,9 @@ chartHolter = function(Conf) {
       	  var jsonVal = $("#jqxgrid").jqxGrid('exportdata', 'json');
 	      var validate = valObjectData(jsonVal);
 	      if(validate){
+	      	$("#frecuencia_min").val(validate.min);
+	      	$("#frecuencia_max").val(validate.max);
+	      	
 	      	var dataSim = {max: validate.max, min: validate.min, no : validate.gen};
 	      	var gendata = genObj(genSimulate(dataSim, dataSim.no));
 	      	chart.series[0].setData(gendata);

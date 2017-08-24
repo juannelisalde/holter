@@ -7,6 +7,8 @@
 		//Cargar menú de tipos de documento
 		get_document();
 
+		$.submit_click("paciente/save_meditation", "paciente", $("#send_meditation"));
+
 		// Validaciòn 
 		$("#documento").change(function(){
 			if($("#tipodocum_id_tipodocum").val().length == 0){
@@ -18,7 +20,13 @@
 		});
 
 		var Conf = {min:fmin, max:fmax, noInp: rows, step: 5, step2: 10, no: 5000};
+		
+		//Jqwidget grids	
+		jq_init(Conf);
+		
+		//Chart
 		chartHolter(Conf);
+
 		$("#excel").change(function(){
 			excel();
 		});
@@ -45,11 +53,28 @@
 			if(response.message != "ok"){
 				$(".msj-diag").genModal("danger","<b>Alerta:</b> "+response.message+' <a target="_blank" href="paciente" class="btn btn-default"><i class="glyphicon glyphicon-plus"></i> Crear paciente</a>')
 			} else{
-				$.each(response.data[0], function(key, val){
-					$("#" + key).val(val);
-				});
+				console.log(response.data);
+				var usr = response.data[0];
+				$("#paciente_id_paciente").val(usr.id_paciente);  
+				$(".msj-diag").genModal("warning","Guardando información del paciente <b>"+usr.nombres+" "+usr.apellidos+"</b> ...")
 			}
 		});
+	}
+
+	function save_meditation(){
+		$.ajax_process("paciente/save_meditation", function(response){
+			if(response.message != "ok"){
+				$.message(response.message);
+			} else{
+				var html = "<select class='form-control' id='tipodocum_id_tipodocum' name='tipodocum_id_tipodocum' required='required'>";
+				html += "<option value=''>SELECCIONE..</option>";
+				$.each(response.data, function(key, val){
+			    	html += "<option value='" + val.id_tipodocum + "'>" + val.nombre + "</option>";
+				});
+				html += "</select>";
+			    $("#tipodocum_id_tipodocum").replaceWith(html);
+			}
+		});	
 	}
 	/**
 	* Function that throw patition for validate excel
@@ -107,5 +132,70 @@
       	console.log("error en la peticion : " + textResponse);
       },
 		});
+	}
+
+	var jq_init = function(Conf){
+		/*Jqwidget*/
+	       	$(document).ready(function () {
+	             // renderer for grid cells.
+	             var numberrenderer = function (row, column, value) {
+	                 return '<div style="text-align: center; margin-top: 5px;">' + (1 + value) + '</div>';
+	             }
+	             // create Grid datafields and columns arrays.
+	             var datafields = [];
+	             var columns = [];
+	             for (var i = 0; i < 3; i++) {
+	                 var text = headTxt(i);
+	                 var exportText = exportTxt(i);
+	                 if (i == 0) {
+	                     var cssclass = 'jqx-widget-header';
+	                     if (theme != '') cssclass += ' jqx-widget-header-' + theme;
+	                     columns[columns.length] = {pinned: true, exportable: false, text: "", columntype: 'number', cellclassname: cssclass, cellsrenderer: numberrenderer };
+	                 }
+	                 datafields[datafields.length] = { name: exportText, type: 'int' };
+	                 columns[columns.length] = { 
+	                 	text: exportText,
+	                 	datafield: exportText,
+	                 	width: 145,
+	                 	align: 'center',
+	                 	cellsalign: 'center',
+	                    validation: function (cell, value) {
+	                          if (value == "")
+	                          { return { result: false, message: "El campo no puede ser vacío" }; }
+	                          var val = parseInt(value);
+	                          if ((val <= 0 || val > Conf.max) && cell.column != "Lathora") 
+	                              { return { result: false, message: "Digite un valor mayor a 0 y menor a "+Conf.max }; }
+
+	                          if ((val <= 0 || val > 10000) && cell.column == "Lathora") 
+	                              { return { result: false, message: "Digite un valor mayor a 0 y menor a "+Conf.max }; }
+
+	                          return true;
+	                    }
+	                  } 
+	              };
+	           	 //};
+			         var source =
+			            {
+			                unboundmode: true,
+			                totalrecords: Conf.noInp,
+			                datafields: datafields,
+			                updaterow: function (rowid, rowdata) {
+			                    // synchronize with the server - send update command   
+			                }
+			            };
+		            var dataAdapter = new $.jqx.dataAdapter(source);
+		             // initialize jqxGrid
+		            $("#jqxgrid").jqxGrid(
+		            {
+		                width: 480,
+		                source: dataAdapter,
+		                editable: true,
+		                theme: 'bootstrap',
+		                columnsresize: true,
+		                selectionmode: 'multiplecellsadvanced',
+		                columns: columns
+		            });
+	        });
+		/*Fin Jqwidget*/
 	}
 </script>

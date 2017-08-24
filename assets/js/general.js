@@ -64,7 +64,7 @@
   * @param string controller to open
   * @param string message to show when response is ok
   */
-  $.submit_click = function(open, message){
+  $.submit_click = function(open, message, form){
     $("form").submit(function(e) {
       event.preventDefault();
       $.ajax_process(open, function(response){
@@ -73,13 +73,18 @@
             window.location.href = "login";
           } else if(message == "home"){
             window.location.href = "home";
+          }  else if(message == "paciente"){
+            $(".msj-diag").genModal('success', "El registro de medición se ha guardado con éxito");
+            form[0].reset();            
           } else{
             $.message(message);
             $("form")[0].reset();
           }
+
         }else{
           $.message(response.message);
         }
+
       });
     });
   }

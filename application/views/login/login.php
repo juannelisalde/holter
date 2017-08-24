@@ -27,6 +27,7 @@
 		      </div>
 	        <input type="password" class="form-control" placeholder="Contraseña" name="pass" id="pass" required>
 		    </div>
+		    <button class="btn btn-link change_pass" type="button">¿Olvidaste tu contraseña?</button>
 		    <br>
 	      <button class="btn btn-lg btn-info btn-block" type="submit">
 	      	<i class="glyphicon glyphicon-log-in"></i> 

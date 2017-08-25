@@ -19,6 +19,7 @@
 			    <div class="input-group-addon">
 			    	<i class="glyphicon glyphicon-envelope"></i>
 			    </div>
+	        <input type="hidden" class="form-control" placeholder="usuario" name="id_usuario" id="id_usuario">
 	        <input type="email" class="form-control" placeholder="Correo" name="email" id="email" required autofocus>
 		    </div>
 	      <div class="input-group">
@@ -27,12 +28,9 @@
 		      </div>
 	        <input type="password" class="form-control" placeholder="Contraseña" name="pass" id="pass" required>
 		    </div>
-		    <button class="btn btn-link change_pass" type="button">¿Olvidaste tu contraseña?</button>
 		    <br>
-	      <button class="btn btn-lg btn-info btn-block" type="submit">
-	      	<i class="glyphicon glyphicon-log-in"></i> 
-	      	Ingresar
-	      </button>
+	      <button class="btn btn-lg btn-info btn-block" type="submit"><i class="glyphicon glyphicon-log-in"></i> Ingresar</button>
+		    <button class="btn btn-link change_pass" type="button">¿Olvidaste tu contraseña?</button>
 	    </form>
 	  </div>
 

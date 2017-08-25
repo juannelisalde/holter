@@ -75,6 +75,15 @@ create table medicionpaciente(
 	constraint fk_medicionpaciente_paciente_id_parametro foreign key(parametros_id_parametro) references parametros(id_parametro)
 ) comment='historial de mediciones de holter del paciente';
 
+create table recuperarpass(
+	token varchar (60) not null,
+	id_usuario int not null,
+	estado_token set ('ACT','INA', 'VEN') not null,
+	fecha_creacion datetime not null,
+	constraint pk_recuperarpass_token primary key (token),
+	constraint fk_recuperarpass_usuario_id_usuario foreign key(id_usuario) references usuarios(id_usuario)
+) comment='oken password usuario';
+
 
 INSERT INTO tipodocum (nombre, sigla, descripcion) VALUES
 ('CÉDULA', 'CC', 'CÉDULA DE CIUDADANÍA'), 

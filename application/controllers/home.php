@@ -11,11 +11,13 @@
 	* Show view by default
 	*/
 
-
 	if (!defined('BASEPATH')) exit('No direct script access allowed');  
  
 	require_once APPPATH."/third_party/PHPExcel/classes/PHPExcel.php";
 
+	/**
+	* Class home
+	*/
 	class home extends CI_Controller{
 		/**
 		* Method construct
@@ -35,7 +37,17 @@
 			$parameters = $this->M_Parametros->get_parameters();
 			$parameters[0]->name = $this->session->userdata["nombres"];
 			$parameters[0]->lastname = $this->session->userdata["apellidos"];
-			$this->load->view("header");
+			$html = "";
+			if($this->session->userdata["tipo_usuario"] == "ADMIN"){
+				$html = '<li role="separator" class="divider"></li>
+          <li><a href="usuarios">
+          	<i class="glyphicon glyphicon-user"></i> Perfil</a>
+          </li>
+          <li>
+          	<a href="parametros"><i class="glyphicon glyphicon-cog"></i> Configuración de sistema</a>
+          </li>';
+			}
+			$this->load->view("header", array("html"=>$html));
 			$this->load->view("home/home", (array)$parameters[0]);
 			$this->load->view("home/home_js", (array)$parameters[0]);
 		}

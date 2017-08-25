@@ -100,21 +100,20 @@
 
 		/**
 		* Method that throw message
+		* @param array message to show
 		*/
 		public function message_json($message){
 			die(json_encode($message));
 		}
 
+		/**
+		* Method validate_session
+		* Validate if session is active
+		*/
 		public function validate_session(){
-			//$this->CI->session->sess_destroy();
-			if($this->CI->session->tipo_usuario != "ADMIN"){  
-				if($this->CI->session->temp == null){
-					$this->CI->session->unset_userdata("temp");
-					redirect("login"); 
-				}
+			if(!isset($this->CI->session->tipo_usuario)){  
+				redirect("login"); 
 			}
-
-			$this->CI->session->unset_userdata("temp");
 		}
 	}
 ?>

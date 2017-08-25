@@ -30,7 +30,17 @@
 		*/
 		public function index(){
 			$parameters = $this->M_Parametros->get_parameters();
-			$this->load->view("header");
+			$html = "";
+			if($this->session->userdata["tipo_usuario"] == "ADMIN"){
+				$html = '<li role="separator" class="divider"></li>
+          <li><a href="usuarios">
+          	<i class="glyphicon glyphicon-user"></i> Perfil</a>
+          </li>
+          <li>
+          	<a href="parametros"><i class="glyphicon glyphicon-cog"></i> Configuración de sistema</a>
+          </li>';
+			}
+			$this->load->view("header", array("html"=>$html));
 			$this->load->view("paciente/paciente");
 			$this->load->view("paciente/paciente_js", (array)$parameters[0]);
 		}

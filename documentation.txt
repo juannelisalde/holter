@@ -1,0 +1,1 @@
+.\phpdoc run -d C:\xampp\htdocs\CI\application\controllers,C:\xampp\htdocs\CI\application\models,C:\xampp\htdocs\CI\application\views,C:\xampp\htdocs\CI\application\libraries -t C:\xampp\htdocs\CI\documentation --template=responsive-twig

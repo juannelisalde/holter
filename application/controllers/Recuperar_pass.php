@@ -18,8 +18,6 @@
 		public function __construct(){
 			parent::__construct();
 			$this->load->library('functions');
-			$this->load->model("M_Usuarios");
-			$this->M_Usuarios->construct($this->input->post());
 		}
 
 		/**

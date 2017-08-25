@@ -58,11 +58,11 @@
 			if(response.message != "ok"){
 				$("#email").val("");
 				$.message(response.message);
+			}else{
+				$("#id_usuario").val(response.data);
 			}
 		});
 	}
-
-
 
 	function send_email(){
 		if($("#email").val().length == 0){

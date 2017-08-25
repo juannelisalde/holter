@@ -70,10 +70,11 @@
       $.ajax_process(open, function(response){
         if(response.message == "ok"){
           if(message == "login"){
+            console.log("hola");
             window.location.href = "login";
           } else if(message == "home"){
             window.location.href = "home";
-          }  else if(message == "paciente"){
+          } else if(message == "paciente"){
             $(".msj-diag").genModal('success', "El registro de medición se ha guardado con éxito");
             form[0].reset();            
           } else{

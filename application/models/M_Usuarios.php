@@ -88,8 +88,8 @@
 				$this->db->trans_start();
 				$this->db->set('modificacion_usuario', 'NOW()', FALSE);
 				$this->db->where(array("id_usuario"=>$this->id_usuario));
-		        $this->db->update("usuarios", $this->form_data);
-		        $this->db->trans_complete();
+		    $this->db->update("usuarios", $this->form_data);
+		    $this->db->trans_complete();
 				return array("message"=>"ok");
 			} catch (Exception  $e){
 				return(array("message"=>"error: $e"));
@@ -128,15 +128,65 @@
 
 			try{
 				$this->db->trans_start();
+				$this->db->set('estado_token', 'INA');
+				$this->db->where('token', sha1($this->id_usuario));
+				$this->db->update('recuperarpass');
+				$this->db->trans_complete();
+			} catch (Exception  $e){
+				return(array("message"=>"error: $e"));
+			}
+
+			try{
+				$this->db->trans_start();
 				$this->db->set('modificacion_usuario', 'NOW()', FALSE);
 				$this->db->set(array("pass"=>$this->pass));
 				$this->db->where('email', $this->email);
 				$this->db->update('usuarios');
 				$this->db->trans_complete();
-			return array("message"=>"ok");
+				return array("message"=>"ok");
 			} catch (Exception  $e){
 				return(array("message"=>"error: $e"));
 			}
+		}
+
+		/**
+		* Method insert_token
+		* Insert token by user recover pass
+		* @return array message
+		*/
+		public function insert_token(){
+			try{
+				$this->db->trans_start();
+				$this->db->set('estado_token', 'VEN');
+				$this->db->where("fecha_creacion >= NOW() - INTERVAL 1 DAY");
+		    $this->db->update("recuperarpass");
+		    $this->db->trans_complete();
+			} catch (Exception  $e){
+				return(array("message"=>"error: $e"));
+			}
+
+			try{
+				$this->db->trans_start();
+				$this->db->set('token', sha1($this->id_usuario));
+				$this->db->set('id_usuario', $this->id_usuario);
+				$this->db->set('estado_token', 'ACT');
+				$this->db->set('fecha_creacion', 'NOW()', FALSE);
+				$this->db->insert('recuperarpass');
+				$this->db->trans_complete();
+				return array("message"=>"ok");
+			} catch (Exception  $e){
+				return array("message"=>"error");
+			}
+		}
+
+		/**
+		* Method get_token
+		* Get token active
+		* @return array message
+		*/
+		public function get_token(){
+			$query = $this->db->get_where("recuperarpass",array("token"=>$this->id_usuario));
+			return $query->result();
 		}
 	}
 ?>

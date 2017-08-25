@@ -26,13 +26,7 @@
 	      		<li>
 	      			<a href="paciente"><i class="glyphicon glyphicon-star"></i> Pacientes</a>
 	      		</li>
-	      		<li role="separator" class="divider"></li>
-	          <li><a href="usuarios">
-	          	<i class="glyphicon glyphicon-user"></i> Perfil</a>
-	          </li>
-	          <li>
-	          	<a href="parametros"><i class="glyphicon glyphicon-cog"></i> Configuración de sistema</a>
-	          </li>
+	          	<?=$htm?>
 	          <li role="separator" class="divider"></li>
 	          <li>
 	          	<a href="login/sign_off"><i class="glyphicon glyphicon-log-out"></i> Cerrar Sesión</a>
@@ -45,12 +39,7 @@
 	          <li class="dropdown ">
 	          	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-user"></i>  <?= ucfirst(strtolower($this->session->userdata["nombres"])) . " " . ucfirst(strtolower($this->session->userdata["apellidos"])); ?> <i class="glyphicon glyphicon-option-vertical"></i></a>
 	          	<ul class="dropdown-menu">
-		            <li>
-		            	<a href="usuarios"><i class="glyphicon glyphicon-user"></i> Perfil</a>
-		            </li>
-		            <li>
-		            	<a href="parametros"><i class="glyphicon glyphicon-cog"></i> Configuración de sistema</a>
-		            </li>
+	          		<?=$html?>
 		            <li role="separator" class="divider"></li>
 		            <li>
 		            	<a href="login/sign_off"><i class="glyphicon glyphicon-log-out"></i> Cerrar Sesión</a>

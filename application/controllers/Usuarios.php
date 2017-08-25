@@ -18,7 +18,13 @@
 		public function __construct(){
 			parent::__construct();
 			$this->load->library('functions');
-			$this->functions->validate_session();
+			if(!$this->input->post("pass2")){
+				$this->functions->validate_session();
+			}else{
+				if($this->input->post("pass") != $this->input->post("pass2")){
+					$this->functions->message_json(array("message"=>"Contraseñas No Coinsiden"));
+				}
+			}
 			$this->load->model("M_Usuarios");
 			$this->M_Usuarios->construct($this->input->post());
 		}
@@ -28,7 +34,17 @@
 		* Load and show views users
 		*/
 		public function index(){
-			$this->load->view("header");
+			$html = "";
+			if($this->session->userdata["tipo_usuario"] == "ADMIN"){
+				$html = '<li role="separator" class="divider"></li>
+          <li><a href="usuarios">
+          	<i class="glyphicon glyphicon-user"></i> Perfil</a>
+          </li>
+          <li>
+          	<a href="parametros"><i class="glyphicon glyphicon-cog"></i> Configuración de sistema</a>
+          </li>';
+			}
+			$this->load->view("header", array("html"=>$html));
 			$this->load->view("usuarios/usuarios");
 			$this->load->view("usuarios/usuarios_js");
 		}
@@ -106,6 +122,7 @@
 			if($response["message"] != "ok"){
 				$this->functions->message_json($response);
 			}
+
 
 			$response = $this->M_Usuarios->recover_pass($this->input->post());
 			$this->functions->message_json($response);

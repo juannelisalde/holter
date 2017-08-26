@@ -14,16 +14,16 @@
 					<div class="card-block">
 						<div class='form-group'>
 							<label for='email'>Correo</label>
-							<input type='email' class='form-control' placeholder='Correo' name='email' id='email' required='required' disabled="disabled">
+							<input type='email' class='form-control' placeholder='Correo' name='email' id='email' required='required' disabled="disabled" maxlength="100">
 						</div>
 
 						<div class='form-group'>
 							<label for='pass'>Contraseña</label>
-							<input type='password' class='form-control' placeholder='Contraseña' name='pass' id='pass' required='required'>
+							<input type='password' class='form-control' placeholder='Contraseña' name='pass' id='pass' required='required' maxlength="40">
 						</div>
 						<div class='form-group'>
 							<label for='pass2'>Confirmar Contraseña</label>
-							<input type='password' class='form-control' placeholder='Confirmar Contraseña' name='pass2' id='pass2' required='required'>
+							<input type='password' class='form-control' placeholder='Confirmar Contraseña' name='pass2' id='pass2' required='required' maxlength="40">
 						</div>
 						<div class='form-group'>
 							<button type='submit' class='btn btn-primary'>Guardar</button>

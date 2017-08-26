@@ -29,6 +29,7 @@
 			$this->functions->validate_session();
 			$this->load->model("M_Parametros");
 		}
+
 		/**
 		* Method index
 		* Load and show views login
@@ -80,10 +81,10 @@
 					$values = array();
 					foreach ($cell as $key => $value) {
 						$values[] = $value;
-						if(!is_numeric($value) || !strlen(trim($value))){
+						if(!is_numeric($value) || !strlen(trim($value)) || $value <= 0){
 							$errors[] = array(
 								"line"=>$cont,
-								"error"=>"Debe Digitar Valor Numerico (" . $value . ")",
+								"error"=>"Debe Digitar Valor Numerico Mayor A Cero (" . $value . ")",
 							);
 						}
 					}

@@ -7,23 +7,23 @@
 							<div class="row">
 								<div class="form-group col-sm-6">
 									<label for="nombres">Nombres</label>
-									<input type="text" class="form-control" placeholder="Nombres" name="nombres" id="nombres" required="required">
+									<input type="text" class="form-control" placeholder="Nombres" name="nombres" id="nombres" required="required" maxlength="50">
 								</div>
 								<div class="form-group col-sm-6">
 									<label for="apellidos">Apellidos</label>
-									<input type="text" class="form-control" placeholder="Apellidos" name="apellidos" id="apellidos" required="required">
+									<input type="text" class="form-control" placeholder="Apellidos" name="apellidos" id="apellidos" required="required" maxlength="50">
 								</div>
 							</div>
 							<div class="row">
 
 								<div class="form-group col-sm-6">
 									<label for="email">Correo</label>
-									<input type="email" class="form-control" placeholder="Correo" name="email" id="email" required="required">
+									<input type="email" class="form-control" placeholder="Correo" name="email" id="email" required="required" maxlength="100">
 								</div>
 
 								<div class="form-group col-sm-6">
 									<label for="pass">Contraseña</label>
-									<input type="password" class="form-control" placeholder="Contraseña" name="pass" id="pass" required="required">
+									<input type="password" class="form-control" placeholder="Contraseña" name="pass" id="pass" required="required" maxlength="40">
 								</div>
 
 							</div>

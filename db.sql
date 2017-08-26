@@ -15,8 +15,8 @@ create table parametros(
 
 create table usuarios(
 	id_usuario int not null auto_increment,
-	nombres varchar(100) not null,
-	apellidos varchar(100) not null,
+	nombres varchar(50) not null,
+	apellidos varchar(50) not null,
 	email varchar(100) not null,
 	pass varchar(40) not null,
 	tipo_usuario set('ADMIN','USER') default 'user' not null,
@@ -40,8 +40,8 @@ create table paciente(
 	id_paciente int not null auto_increment,
 	tipodocum_id_tipodocum int not null,
 	documento varchar(15) not null,
-	nombres varchar(100) not null,
-	apellidos varchar(100) not null,
+	nombres varchar(50) not null,
+	apellidos varchar(50) not null,
 	fecha_nacimiento date not null,
 	genero set('', 'M','F') default '' not null,
 	telefono varchar(100) not null,

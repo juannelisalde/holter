@@ -15,7 +15,7 @@
 								</div>
 								<div class="form-group col-sm-4">
 									<label for="documento">Documento</label>
-									<input type="text" class="form-control" placeholder="Documento" name="documento" id="documento_head" required="required">
+									<input type="text" class="form-control" placeholder="Documento" name="documento" id="documento_head" required="required" maxlength="15">
 								</div>
 								<div class="form-group col-sm-4">
 									<br>
@@ -51,30 +51,38 @@
 											</div>
 											<div class="form-group col-sm-6">
 												<label for="documento">Documento</label>
-												<input type="text" class="form-control" placeholder="Documento" name="documento" id="documento" required="required">
+												<input type="text" class="form-control" placeholder="Documento" name="documento" id="documento" required="required" maxlength="15">
 											</div>
 										</div>
 
 										<div class="row">
 											<div class="form-group col-sm-6">
 												<label for="nombres">Nombres</label>
-												<input type="text" class="form-control" placeholder="Nombres" name="nombres" id="nombres" required="required">
+												<input type="text" class="form-control" placeholder="Nombres" name="nombres" id="nombres" required="required" maxlength="50">
 											</div>
 											
 											<div class="form-group col-sm-6">
 												<label for="apellidos">Apellidos</label>
-												<input type="text" class="form-control" placeholder="Apellidos" name="apellidos" id="apellidos" required="required">
+												<input type="text" class="form-control" placeholder="Apellidos" name="apellidos" id="apellidos" required="required" maxlength="50">
 											</div>
 										</div>
 									
 										<div class="row">
 											<div class="form-group col-sm-6">
-												<label for="fecha_nacimiento">Fecha De Nacimiento</label>
-												<input type="date" class="form-control" placeholder="Fecha De Nacimiento" name="fecha_nacimiento" id="fecha_nacimiento" required="required">
+												<label for="fecha_nacimiento">fecha_nacimiento</label>
+												<div class="form-group">
+													<div class='input-group date'>
+														<input type="date" class="form-control" placeholder="fecha_nacimiento" name="fecha_nacimiento" id="fecha_nacimiento" required="required" max="2016-01-01">
+								            <span class="input-group-addon">
+								              <span id="edad"></span>
+								            </span>
+									        </div>
+												</div>
 											</div>
 
+
 											<div class="form-group col-sm-6">
-												<label for="fecha_nacimiento">Género</label>
+												<label for="genero">Género</label>
 												<select class="form-control" name="genero" id="genero" required="required">
 													<option value="M">Masculino</option>
 													<option value="F">Femenino</option>
@@ -85,12 +93,12 @@
 										<div class="row">
 											<div class="form-group col-sm-6">
 												<label for="telefono">Telefono</label>
-												<input type="text" class="form-control" placeholder="Telefono" name="telefono" id="telefono" required="required">
+												<input type="number" class="form-control" placeholder="Telefono" name="telefono" id="telefono" required="required" min="0" max="9999999999">
 											</div>
 
 											<div class="form-group col-sm-6">
 												<label for="celular">Celular</label>
-												<input type="text" class="form-control" placeholder="Celular" name="celular" id="celular" required="required">
+												<input type="number" class="form-control" placeholder="Celular" name="celular" id="celular" required="required" min="0" max="9999999999">
 											</div>
 										</div>
 
@@ -98,12 +106,12 @@
 
 											<div class="form-group col-sm-6">
 												<label for="email">Email</label>
-												<input type="email" class="form-control" placeholder="Email" name="email" id="email" required="required">
+												<input type="email" class="form-control" placeholder="Email" name="email" id="email" required="required" maxlength="100">
 											</div>
 											
 											<div class="form-group col-sm-6">
 												<label for="direccion">Dirección</label>
-												<input type="text" class="form-control" placeholder="Dirección" name="direccion" id="direccion" required="required">
+												<input type="text" class="form-control" placeholder="Dirección" name="direccion" id="direccion" required="required" maxlength="100">
 											</div>
 
 										</div>
@@ -137,17 +145,8 @@
 						<br>
 					</div>
 				</div>
-
 			</div>
-
-
-
-
-				
-
-					
-
-	    </div>			
+	  </div>			
 	</body>
 
 	<script type="text/javascript" src="<?php echo base_url(); ?>/assets/js/jquery-3.2.1.min.js"></script> 

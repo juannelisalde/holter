@@ -94,7 +94,7 @@ var exportTxt = function(item){
 	switch(item){
 		case 0: word = "FMin" ; break;
 		case 1: word = "FMax" ; break;
-		case 2: word = "Lathora" ; break;
+		case 2: word = "Lat/Hora" ; break;
 		case 3: word = "Hora" ; break;
 		default: word = "und" ; break;
 	}
@@ -129,7 +129,7 @@ var valObjectData =  function(obj){
 				switch(att){
 					case "FMin": min = (min>=valInt)?valInt:min; break;
 					case "FMax": max = (max<=valInt)?valInt:max; break;
-					case "Lathora": lh = lh + valInt; break;
+					case "Lat/Hora": lh = lh + valInt; break;
 				}
 
 			}

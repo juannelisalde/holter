@@ -8,9 +8,28 @@ var fmax = <?= $frecardiacamax;?>;
 		chartHolter(Conf);
 
 		$.remove_enter();
+
 		$.submit_click("paciente/insert", "Se Actualizo La Informacion Del Paciente");
+		
 		get_document();
 
+		d = new Date();
+		mes = parseInt(d.getMonth()) + 1;
+		day = parseInt(d.getDay()) + 2;
+		if(d.getMonth() < 10){
+			mes = "0" + parseInt(d.getMonth() + 1);
+		}
+		if(d.getDay() < 10){
+			day = "0" + parseInt(d.getDay() + 2);
+		}
+		$("#fecha_nacimiento").attr({
+       "min" : d.getFullYear() - 110 + "-" + mes + "-" + day,
+       "max" : d.getFullYear() - 18 + "-" + mes + "-" + day,
+    });
+
+    $("#fecha_nacimiento").change(function(){
+       $("#edad").text(d.getFullYear() - $(this).val().substr(0, 4) + " Años");
+    });
 
 		$("#documento").change(function(){
 			if($("#tipodocum_id_tipodocum").val().length == 0){

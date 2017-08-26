@@ -72,22 +72,18 @@
 		        <div id="diagnostic-body" class="col-md-6"></div>
 		        <div class="col-md-6">
 		        	<form id="send_meditation">
-					  		<h4><i class="glyphicon glyphicon-search"></i> Consultar paciente</h4>
-		        	  <div class="form-group">
-		        	  			<input type="hidden" name="paciente_id_paciente" id="paciente_id_paciente"/>	
-		        	  			<input type="hidden" name="parametros_id_parametro" id="parametros_id_parametro" value="<?= $id_parametro;?>"/>	
-		        	  			<input type="hidden" name="frecuencia_min" id="frecuencia_min" />	
-		        	  			<input type="hidden" name="frecuencia_max" id="frecuencia_max" />	
-							    <select class="form-control" name="tipodocum_id_tipodocum" id="tipodocum_id_tipodocum" required>
-									  <option>Escoge un Tipo de documento</option>
-									  <option value="TI">Tarjeta de identidad</option>
-									  <option value="CC">Cédula de ciudadania</option>
-									  <option value="CE">Cédula de extranjeria</option>
-									  <option value="PS">Pasaporte</option>
-									</select>
-							 	</div>
+					  	<h4><i class="glyphicon glyphicon-search"></i> Consultar paciente</h4>
+		        	    <div class="form-group">
+	        	  			<input type="hidden" name="paciente_id_paciente" id="paciente_id_paciente"/>	
+	        	  			<input type="hidden" name="parametros_id_parametro" id="parametros_id_parametro" value="<?= $id_parametro;?>"/>	
+	        	  			<input type="hidden" name="frecuencia_min" id="frecuencia_min" />	
+	        	  			<input type="hidden" name="frecuencia_max" id="frecuencia_max" />	
+						    <select class="form-control" name="tipodocum_id_tipodocum" id="tipodocum_id_tipodocum" required>
+								  <option>Escoge un Tipo de documento</option>
+								</select>
+						 	</div>
 							  <div class="form-group">
-							    <input type="text" class="form-control" name="documento" id="documento" placeholder="Documento de identidad" required>
+							    <input type="text" class="form-control" name="documento" id="documento" placeholder="Documento de identidad" maxlength="15" required>
 							  </div>
 							  <div class="row">
 								  <div class="form-group col-sm-6">

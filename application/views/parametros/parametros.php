@@ -13,7 +13,7 @@
 
 									<div class="form-group col-sm-3">
 										<label for="frecardiacamax">Frecuencia Máxima</label>
-										<input type="number" class="form-control" placeholder="Frecuencia Máxima" name="frecardiacamax" id="frecardiacamax" required="required" min="0" max="180">
+										<input type="number" class="form-control" placeholder="Frecuencia Máxima" name="frecardiacamax" id="frecardiacamax" required="required" min="0" max="220">
 									</div>
 
 									<div class="form-group col-sm-3">

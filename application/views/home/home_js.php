@@ -9,6 +9,19 @@
 
 		$.submit_click("paciente/save_meditation", "paciente", $("#send_meditation"));
 
+		d = new Date();
+		mes = parseInt(d.getMonth()) + 1;
+		day = parseInt(d.getDay()) + 2;
+		if(d.getMonth() < 10){
+			mes = "0" + parseInt(d.getMonth() + 1);
+		}
+		if(d.getDay() < 10){
+			day = "0" + parseInt(d.getDay() + 2);
+		}
+		$("#date_ini").attr({
+       "max" : d.getFullYear() + "-" + mes + "-" + day,
+    });
+
 		// Validaciòn 
 		$("#documento").change(function(){
 			if($("#tipodocum_id_tipodocum").val().length == 0){
@@ -72,10 +85,11 @@
 			    	html += "<option value='" + val.id_tipodocum + "'>" + val.nombre + "</option>";
 				});
 				html += "</select>";
-			    $("#tipodocum_id_tipodocum").replaceWith(html);
+			  $("#tipodocum_id_tipodocum").replaceWith(html);
 			}
 		});	
 	}
+
 	/**
 	* Function that throw patition for validate excel
 	*/
@@ -113,89 +127,84 @@
 						html += "</table>";
 					}else{
 						var html = response.message; 
-
 					}
 
-
 					$(".principal.alert-content").genModal('danger', html);
-
 				} else{
 					$.each(response.data, function(key, row){
-            			$("#jqxgrid").jqxGrid('setcellvalue', key, 'FMin', row[0]);
-            			$("#jqxgrid").jqxGrid('setcellvalue', key, 'FMax', row[1]);
-            			$("#jqxgrid").jqxGrid('setcellvalue', key, 'Lathora', row[2]);
+      			$("#jqxgrid").jqxGrid('setcellvalue', key, 'FMin', row[0]);
+      			$("#jqxgrid").jqxGrid('setcellvalue', key, 'FMax', row[1]);
+      			$("#jqxgrid").jqxGrid('setcellvalue', key, 'Lat/Hora', row[2]);
 					});
 				}
       },
       error : function(xhr, status, textResponse) {
-      	//$.message("Ocurrio Un Error");
+      	$.message("Ocurrio Un Error");
       	console.log("error en la peticion : " + textResponse);
       },
 		});
 	}
 
 	var jq_init = function(Conf){
-		/*Jqwidget*/
-	       	$(document).ready(function () {
-	             // renderer for grid cells.
-	             var numberrenderer = function (row, column, value) {
-	                 return '<div style="text-align: center; margin-top: 5px;">' + (1 + value) + '</div>';
-	             }
-	             // create Grid datafields and columns arrays.
-	             var datafields = [];
-	             var columns = [];
-	             for (var i = 0; i < 3; i++) {
-	                 var text = headTxt(i);
-	                 var exportText = exportTxt(i);
-	                 if (i == 0) {
-	                     var cssclass = 'jqx-widget-header';
-	                     if (theme != '') cssclass += ' jqx-widget-header-' + theme;
-	                     columns[columns.length] = {pinned: true, exportable: false, text: "", columntype: 'number', cellclassname: cssclass, cellsrenderer: numberrenderer };
-	                 }
-	                 datafields[datafields.length] = { name: exportText, type: 'int' };
-	                 columns[columns.length] = { 
-	                 	text: exportText,
-	                 	datafield: exportText,
-	                 	width: 145,
-	                 	align: 'center',
-	                 	cellsalign: 'center',
-	                    validation: function (cell, value) {
-	                          if (value == "")
-	                          { return { result: false, message: "El campo no puede ser vacío" }; }
-	                          var val = parseInt(value);
-	                          if ((val <= 0 || val > Conf.max) && cell.column != "Lathora") 
-	                              { return { result: false, message: "Digite un valor mayor a 0 y menor a "+Conf.max }; }
+		$(document).ready(function () {
+			// renderer for grid cells.
+			var numberrenderer = function (row, column, value) {
+				return '<div style="text-align: center; margin-top: 5px;">' + (1 + value) + '</div>';
+			}
 
-	                          if ((val <= 0 || val > 10000) && cell.column == "Lathora") 
-	                              { return { result: false, message: "Digite un valor mayor a 0 y menor a "+Conf.max }; }
-
-	                          return true;
-	                    }
-	                  } 
-	              };
-	           	 //};
-			         var source =
-			            {
-			                unboundmode: true,
-			                totalrecords: Conf.noInp,
-			                datafields: datafields,
-			                updaterow: function (rowid, rowdata) {
-			                    // synchronize with the server - send update command   
-			                }
-			            };
-		            var dataAdapter = new $.jqx.dataAdapter(source);
-		             // initialize jqxGrid
-		            $("#jqxgrid").jqxGrid(
-		            {
-		                width: 480,
-		                source: dataAdapter,
-		                editable: true,
-		                theme: 'bootstrap',
-		                columnsresize: true,
-		                selectionmode: 'multiplecellsadvanced',
-		                columns: columns
-		            });
-	        });
-		/*Fin Jqwidget*/
+			// create Grid datafields and columns arrays.
+			var datafields = [];
+			var columns = [];
+			for (var i = 0; i < 3; i++) {
+				var text = headTxt(i);
+				var exportText = exportTxt(i);
+				if (i == 0) {
+					var cssclass = 'jqx-widget-header';
+					if (theme != ''){
+						cssclass += ' jqx-widget-header-' + theme;
+					}
+					columns[columns.length] = {
+						pinned: true, exportable: false, text: "", columntype: 'number', cellclassname: cssclass, cellsrenderer: numberrenderer 
+					}
+				}
+				datafields[datafields.length] = { name: exportText, type: 'int' };
+				columns[columns.length] = { 
+					text: exportText,
+					datafield: exportText,
+					width: 145,
+					align: 'center',
+					cellsalign: 'center',
+					validation: function (cell, value) {
+						if (value == ""){ return { result: false, message: "El campo no puede ser vacío" }; }
+						var val = parseInt(value);
+						if ((val <= 0 || val > Conf.max) && cell.column != "Lat/Hora") 
+						{ return { result: false, message: "Digite un valor mayor a 0 y menor a "+Conf.max }; }
+						if ((val <= 0 || val > 10000) && cell.column == "Lat/Hora") 
+						{ return { result: false, message: "Digite un valor mayor a 0 y menor a "+Conf.max }; }
+						return true;
+					}
+				}
+			}
+			//};
+			var source = {
+				unboundmode: true,
+				totalrecords: Conf.noInp,
+				datafields: datafields,
+				updaterow: function (rowid, rowdata) {
+				// synchronize with the server - send update command   
+				}
+			};
+			var dataAdapter = new $.jqx.dataAdapter(source);
+			// initialize jqxGrid
+			$("#jqxgrid").jqxGrid({
+				width: 480,
+				source: dataAdapter,
+				editable: true,
+				theme: 'bootstrap',
+				columnsresize: true,
+				selectionmode: 'multiplecellsadvanced',
+				columns: columns
+			});
+		});
 	}
 </script>

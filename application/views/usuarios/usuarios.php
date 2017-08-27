@@ -7,6 +7,7 @@
 							<div class="row">
 								<div class="form-group col-sm-6">
 									<label for="nombres">Nombres</label>
+									<input type="hidden" class="form-control" placeholder="id_usuario" name="id_usuario" id="id_usuario">
 									<input type="text" class="form-control" placeholder="Nombres" name="nombres" id="nombres" required="required" maxlength="50">
 								</div>
 								<div class="form-group col-sm-6">

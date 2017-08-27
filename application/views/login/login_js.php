@@ -4,10 +4,6 @@
 		
 		$.submit_click("login/login", "home");
 
-		$("#email").change(function(){
-			email();
-		});
-
 		$(".change_pass").click(send_email);
 
 		$(".modal-forget").click(function(e){
@@ -16,21 +12,7 @@
     	send_email();
 		});
 	});
-
-	/**
-	* Function that throw petition for get data patient
-	*/
-	function email(){
-		$.ajax_process("login/user", function(response){
-			if(response.message != "ok"){
-				$("#email").val("");
-				$.message(response.message);
-			}else{
-				$("#id_usuario").val(response.data);
-			}
-		});
-	}
-
+	
 	/**
 	* Function that send email for recover pass
 	*/
@@ -44,7 +26,7 @@
 			if(response.message != "ok"){
 				$.message(response.message);
 			} else{
-				$.message("Se Envio Correo");
+				$.message("Por Favor Revise Su Correo, En Caso De No Estar En La Bandeja De Entrada Revise En Spam");
 			}
 		});	
 	}

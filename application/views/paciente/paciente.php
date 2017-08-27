@@ -19,7 +19,7 @@
 								</div>
 								<div class="form-group col-sm-4">
 									<br>
-									<button style="margin-top:5px;" type="button" class="btn btn-info"><i class="glyphicon glyphicon-search"></i></button>
+									<button style="margin-top:5px;" type="button" class="btn btn-info search_doc"><i class="glyphicon glyphicon-search"></i></button>
 								</div>
 								<hr>
 							</div>

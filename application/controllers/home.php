@@ -61,6 +61,13 @@
 			if(!isset($_FILES["file"])){
 				$this->functions->message_json(array("message"=>"Debe Enviar Archivo De Excel 97-2003"));
 			}
+
+			$ext = explode(".", $_FILES["file"]["name"]);
+      $ext = array_pop($ext);
+      if(strtoupper($ext) != "XLS" && strtoupper($ext) != "XLSX"){
+				$this->functions->message_json(array("message"=>"Debe Enviar Archivo De Excel 97-2003"));
+			}
+
 			$excel = PHPExcel_IOFactory::load($_FILES["file"]["tmp_name"]);
 			
 			$columns = $excel->getActiveSheet()->getHighestColumn();

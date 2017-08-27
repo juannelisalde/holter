@@ -21,6 +21,7 @@
 				$.message("Debe Seleccionar Tipo De Documento");
 				$(this).val("");
 			}else{
+				$("#paciente_id_paciente").val("");
 				document_patient();
 			}
 		});
@@ -195,13 +196,14 @@
 	function field_date(){
 		d = new Date();
 		mes = parseInt(d.getMonth()) + 1;
-		day = parseInt(d.getDay()) + 2;
+		day = parseInt(d.getDate());
 		if(d.getMonth() < 10){
 			mes = "0" + parseInt(d.getMonth() + 1);
 		}
-		if(d.getDay() < 10){
-			day = "0" + parseInt(d.getDay() + 2);
+		if(day < 10){
+			day = "0" + day;
 		}
+
 		$("#date_ini").attr({
       "max" : d.getFullYear() + "-" + mes + "-" + day,
     });

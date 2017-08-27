@@ -160,7 +160,7 @@
 			$result = $query->result();
 
 			if(count($result) > 0){
-				return array("message"=>"La fecha de medición ya existe, por favor escoja otra fecha.");
+				return array("message"=>"Ya Existe Combinación De Usuario, Fecha Y Hora De Medición");
 			}
 			
 			try{

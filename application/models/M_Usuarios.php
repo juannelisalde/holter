@@ -113,6 +113,52 @@
 			$query = $this->db->get_where("usuarios",$para);
 			return $query->result();
 		}
+		
+		/**
+		* Method insert_token
+		* Insert token by user recover pass
+		* @return array message
+		*/
+		public function insert_token(){
+			try{
+				$this->db->trans_start();
+				$this->db->set('estado_token', 'VEN');
+				$this->db->where("TIMESTAMPDIFF(HOUR, NOW(), fecha_creacion) * -1 >= 24");
+		    $this->db->update("recuperarpass");
+		    $this->db->trans_complete();
+			} catch (Exception  $e){
+				return(array("message"=>"error: $e"));
+			}
+
+			$response = $this->get_token();
+			if(count($response) > 0){
+				return array("message"=>"ok", "token"=>$response[0]->token);
+			}
+
+			try{
+				$this->db->trans_start();
+				$hash = sha1($this->id_usuario . " " .date("d-m-Y H:i:s"));
+				$this->db->set('token', sha1($hash));
+				$this->db->set('id_usuario', $this->id_usuario);
+				$this->db->set('estado_token', 'ACT');
+				$this->db->set('fecha_creacion', 'NOW()', FALSE);
+				$this->db->insert('recuperarpass');
+				$this->db->trans_complete();
+				return array("message"=>"ok", "token"=>$hash);
+			} catch (Exception  $e){
+				return array("message"=>"error");
+			}
+		}
+
+		/**
+		* Method get_token
+		* Get token active
+		* @return array message
+		*/
+		public function get_token(){
+			$query = $this->db->get_where("recuperarpass",array("id_usuario"=>$this->id_usuario, "estado_token"=>"ACT"));
+			return $query->result();
+		}
 
 		/**
 		* Method recover_pass
@@ -120,16 +166,20 @@
 		* @return array message
 		*/
 		public function recover_pass(){
-			$query = $this->db->get_where("usuarios",array("email"=>$this->email));
+			$this->db->select('token');    
+			$this->db->from('usuarios');
+			$this->db->join('recuperarpass', 'usuarios.id_usuario = recuperarpass.id_usuario');
+			$this->db->where("estado_token", "ACT");
+			$query = $this->db->get();
 			$result = $query->result();
 			if(count($result) == 0){
-				return array("message"=>"No Existe Usuario");
+				return array("message"=>"Usuario No Tiene Token Activo");
 			}
 
 			try{
 				$this->db->trans_start();
 				$this->db->set('estado_token', 'INA');
-				$this->db->where('token', sha1($this->id_usuario));
+				$this->db->where('token', $result[0]->token);
 				$this->db->update('recuperarpass');
 				$this->db->trans_complete();
 			} catch (Exception  $e){
@@ -149,44 +199,5 @@
 			}
 		}
 
-		/**
-		* Method insert_token
-		* Insert token by user recover pass
-		* @return array message
-		*/
-		public function insert_token(){
-			try{
-				$this->db->trans_start();
-				$this->db->set('estado_token', 'VEN');
-				$this->db->where("fecha_creacion >= NOW() - INTERVAL 1 DAY");
-		    $this->db->update("recuperarpass");
-		    $this->db->trans_complete();
-			} catch (Exception  $e){
-				return(array("message"=>"error: $e"));
-			}
-
-			try{
-				$this->db->trans_start();
-				$this->db->set('token', sha1($this->id_usuario));
-				$this->db->set('id_usuario', $this->id_usuario);
-				$this->db->set('estado_token', 'ACT');
-				$this->db->set('fecha_creacion', 'NOW()', FALSE);
-				$this->db->insert('recuperarpass');
-				$this->db->trans_complete();
-				return array("message"=>"ok");
-			} catch (Exception  $e){
-				return array("message"=>"error");
-			}
-		}
-
-		/**
-		* Method get_token
-		* Get token active
-		* @return array message
-		*/
-		public function get_token(){
-			$query = $this->db->get_where("recuperarpass",array("token"=>$this->id_usuario));
-			return $query->result();
-		}
 	}
 ?>

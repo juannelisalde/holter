@@ -122,7 +122,7 @@ var valObjectData =  function(obj){
 		for (att in v) {
 			var valInt = parseNum(v[att]);
 			if(v[att] == "" || valInt <= 0 || typeof valInt != "number"){
-				$.message("Digite Un Valor Válido En La Respectiva Celda"); 
+				$.message("Debe Digitar La Totalidad De La Grilla"); 
 				validate = false;
 				return false;
 			}else{

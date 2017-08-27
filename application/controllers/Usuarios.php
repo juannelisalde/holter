@@ -123,7 +123,6 @@
 				$this->functions->message_json($response);
 			}
 
-
 			$response = $this->M_Usuarios->recover_pass($this->input->post());
 			$this->functions->message_json($response);
 		}

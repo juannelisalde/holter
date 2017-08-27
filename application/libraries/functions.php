@@ -35,12 +35,12 @@
 		public function validate_fields($fields, $form_data){
 			foreach ($fields[0] as $key => $value) {
 				if(!array_key_exists($value, $form_data) || !strlen(trim($form_data[$value]))){
-					return array("message"=>"Debe Digitar El Campo " . $fields[1][$key]);
+					return array("message"=>"Debe Diligenciar El Campo " . $fields[1][$key]);
 				}
 
 				$response = $this->validate_type_field($form_data[$value], $fields[2][$key]);
 				if($response != "ok"){
-					return array("message"=>$response . " (" . $form_data[$value] . ") En El Campo $value - " . $fields[1][$key]);
+					return array("message"=>$response . " (" . $form_data[$value] . ")");
 				}
 			}
 

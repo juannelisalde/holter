@@ -14,18 +14,13 @@ var fmax = <?= $frecardiacamax;?>;
 
 		date_birth();
 
-		$.submit_click("paciente/insert", "Se Actualizo La Informacion Del Paciente");
-
-		$("#documento").change(function(){
-			if($("#tipodocum_id_tipodocum").val().length == 0){
-				$.message("Debe Seleccionar Tipo De Documento");
-				$(this).val("");
-			}else{
-				$("#tipodocum_id_tipodocum_head").val($("#tipodocum_id_tipodocum").val());
-				$("#documento_head").val($("#documento").val());
-				document_patient();
+		$(".search_doc").click(function(){
+			if($("#tipodocum_id_tipodocum").val().length == 0 || $("#documento").val().length == 0){
+				$.message("Debe Seleccionar Tipo De Documento y Digitar Un Documento");
 			}
 		});
+
+		$.submit_click("paciente/insert", "Se Actualizo La Informacion Del Paciente");
 
 		$("#documento_head").change(function(){
 			if($("#tipodocum_id_tipodocum_head").val().length == 0){
@@ -35,6 +30,19 @@ var fmax = <?= $frecardiacamax;?>;
 				$("#tab_info_pat").click();
 				$("#tipodocum_id_tipodocum").val($("#tipodocum_id_tipodocum_head").val());
 				$("#documento").val($("#documento_head").val()).trigger("change");
+			}
+		});
+		
+		$("#documento").change(function(){
+			if($("#tipodocum_id_tipodocum").val().length == 0){
+				$.message("Debe Seleccionar Tipo De Documento");
+				$(this).val("");
+			}else{
+				$("#tipodocum_id_tipodocum_head").val($("#tipodocum_id_tipodocum").val());
+				$("#documento_head").val($("#documento").val());
+				if($("#documento").val().length > 0){
+					document_patient();
+				}
 			}
 		});
 
@@ -55,12 +63,12 @@ var fmax = <?= $frecardiacamax;?>;
 	function date_birth(){
 		d = new Date();
 		mes = parseInt(d.getMonth()) + 1;
-		day = parseInt(d.getDay()) + 2;
+		day = parseInt(d.getDate());
 		if(d.getMonth() < 10){
 			mes = "0" + parseInt(d.getMonth() + 1);
 		}
-		if(d.getDay() < 10){
-			day = "0" + parseInt(d.getDay() + 2);
+		if(day < 10){
+			day = "0" + day;
 		}
 
 		$("#fecha_nacimiento").attr({

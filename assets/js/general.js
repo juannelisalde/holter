@@ -11,6 +11,7 @@
       data : $.obj_form_data(),
       type : "POST",
       dataType : "json",
+      cache: false,
       beforeSend: function( xhr ) {
         $('#loading').css("visibility", "visible");
       },
@@ -106,7 +107,9 @@
   * Method taht show modal with message
   */
   $.message = function(message){
-    html =  "<div class='modal fade' id='myModal' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>";
+    $("#myModal").remove();
+    
+    var html =  "<div class='modal fade' id='myModal' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>";
     html += "   <div class='modal-dialog' role='document'>";
     html += "     <div class='modal-content'>";
     html += "       <div class='modal-header'>";
@@ -127,7 +130,7 @@
 
     $("body").append(html);
 
-    $('#myModal').modal({backdrop: 'static', keyboard: false})  
+    $('#myModal').modal({backdrop: 'static', keyboard: false});
 
     $('#myModal').modal('show');
   }

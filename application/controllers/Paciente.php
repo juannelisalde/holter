@@ -126,12 +126,12 @@
 		* save information of user meditation
 		*/
 		public function save_meditation(){
-
-			//die();
+			if(!$this->input->post("paciente_id_paciente")){
+				$this->functions->message_json(array("message"=>"Paciente No Existe"));	
+			}
 
 			$fields = array(
 				array(
-				    "paciente_id_paciente",
 				    "parametros_id_parametro",
 				    "frecuencia_min",
 				    "frecuencia_max",
@@ -139,7 +139,6 @@
 				    "time_ini",
 				),
 				array(
-				    "Paciente",
 				    "ID parámetro",
 				    "frecuencia mínima",
 				    "frecuencia máxima",
@@ -147,7 +146,6 @@
 				    "Hora inicial",
 				),
 				array(
-					"integer",
 					"integer",
 					"integer",
 					"integer",
@@ -163,11 +161,7 @@
 			}
 
 			$response = $this->M_Paciente->save_meditation();
-
 			$this->functions->message_json($response);
-
-			//extract($this->input->post());
-
 		}
 	}
 ?>

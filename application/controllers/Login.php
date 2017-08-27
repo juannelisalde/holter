@@ -56,9 +56,16 @@
 				$this->functions->message_json($response);
 			}
 
+			$this->M_Usuarios->construct(array("email"=>$this->input->post("email")));
 			$response = $this->M_Usuarios->consult();
 			if(count($response) == 0){
 				$this->functions->message_json(array("message"=>"No Existe Usuario"));
+			}
+			
+			$this->M_Usuarios->construct($this->input->post());
+			$response = $this->M_Usuarios->consult();
+			if(count($response) == 0){
+				$this->functions->message_json(array("message"=>"Contraseña Incorrecta"));
 			}
 			
 			$user = array(
@@ -122,19 +129,21 @@
 				$this->functions->message_json($response);
 			}
 
-			if($this->input->post("email" !== null) || !strlen(trim($this->input->post("email")))){
-				$this->functions->message_json(array("message"=>"Debe Digitar Correo Correo"));
+			$this->M_Usuarios->construct(array("email"=>$this->input->post("email")));
+			$response = $this->M_Usuarios->consult();
+			if(count($response) == 0){
+				$this->functions->message_json(array("message"=>"No Existe Usuario"));
 			}
+
+			$this->M_Usuarios->construct((array)$response[0]);
+			$response = $this->M_Usuarios->insert_token();
 
 			$http = (strtoupper(substr($_SERVER["SERVER_PROTOCOL"],0,5)) == "HTTPS") ? "https" : "http";
 			$message = "Este Correo Es Para Recuperar La Contraseña, \n
 			Por favor 
-			<a href='" . $http . "://" . $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . "/CI/recuperar_pass?id_usuario=" . $this->input->post("id_usuario") . "&email=" . $this->input->post("email") . "'>Olvido Contraseña</a>";
+			<a href='" . $http . "://" . $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . "/CI/recuperar_pass?token=" . $response["token"] . "&email=" . $this->input->post("email") . "'>Olvido Contraseña</a>";
 			
 			$this->send_email->send($this->input->post("email"), "Recuperar Contraseña", $message);
-			
-
-			$this->M_Usuarios->insert_token();
 
 			$this->functions->message_json(array("message"=>"ok"));
 		}

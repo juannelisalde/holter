@@ -65,26 +65,37 @@
 			
 			$columns = $excel->getActiveSheet()->getHighestColumn();
 			if($columns != "C"){
-				$this->functions->message_json(array("message"=>"Archivo Debe Tener 3 Columnas"));
+				$this->functions->message_json(array("message"=>"Archivo Debe Contener 3 Columnas"));
 			}
+
+			$parameters = $this->M_Parametros->get_parameters();
+			$meditions = $parameters[0]->cantidadmediciones + 1;
 			$rows = $excel->getActiveSheet()->getHighestRow();
-			if($rows < 22){
-				$this->functions->message_json(array("message"=>"Archivo Debe Tener 22 Filas"));
+			if($rows < $meditions){
+				$this->functions->message_json(array("message"=>"Archivo Debe Contener " . $meditions . " Filas"));
 			}
 			
+			$max_frecuency = $parameters[0]->frecardiacamax;
 			$cont = 0; 
 			$errors = array();
 			$data = array();
 			$cell_collection = $excel->getActiveSheet()->toArray(null,true,true,true);
-			foreach ($cell_collection as $cell) {
+			foreach ($cell_collection as $column => $cell) {
 				if($cont > 0){
 					$values = array();
 					foreach ($cell as $key => $value) {
 						$values[] = $value;
 						if(!is_numeric($value) || !strlen(trim($value)) || $value <= 0){
 							$errors[] = array(
-								"line"=>$cont,
+								"line"=>$cont+1,
 								"error"=>"Debe Digitar Valor Numerico Mayor A Cero (" . $value . ")",
+							);
+						}
+
+						if((strtoupper($key) == "A" || strtoupper($key) == "B") && $value > $max_frecuency){
+							$errors[] = array(
+								"line"=>$cont+1,
+								"error"=>"Debe Digitar Frecuencia Menor A (" . $max_frecuency . ")",
 							);
 						}
 					}

@@ -70,7 +70,6 @@
       $.ajax_process(open, function(response){
         if(response.message == "ok"){
           if(message == "login"){
-            console.log("hola");
             window.location.href = "login";
           } else if(message == "home"){
             window.location.href = "home";
@@ -90,7 +89,61 @@
     });
   }
 
-  $.message = function(message){
-    alert(message);
+  /**
+  * Function that replace html field select 
+  * @param object data to select
+  * @param string id nuew field
+  */
+  $.replaceHtmlTD =  function(data, id){
+    var html = "<option value=''>Seleccione un tipo de documento...</option>";
+    $.each(data, function(key, val){
+        html += "<option value='" + val.id_tipodocum + "'>" + val.nombre + "</option>";
+    });
+    return html;
   }
+
+  /**
+  * Method taht show modal with message
+  */
+  $.message = function(message){
+    html =  "<div class='modal fade' id='myModal' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>";
+    html += "   <div class='modal-dialog' role='document'>";
+    html += "     <div class='modal-content'>";
+    html += "       <div class='modal-header'>";
+    html += "         <h5 class='modal-title' id='exampleModalLabel'>Mensaje</h5>";
+    html += "         <button type='button' class='close' data-dismiss='modal' aria-label='Close'>";
+    html += "           <span aria-hidden='true'>&times;</span>";
+    html += "         </button>";
+    html += "       </div>";
+    html += "       <div class='modal-body'>";
+    html +=           message;
+    html += "       </div>";
+    html += "       <div class='modal-footer'>";
+    html += "         <button type='button' class='btn btn-primary' data-dismiss='modal'>Close</button>";
+    html += "       </div>";
+    html += "     </div>";
+    html += "   </div>";
+    html += "</div>";
+
+    $("body").append(html);
+
+    $('#myModal').modal({backdrop: 'static', keyboard: false})  
+
+    $('#myModal').modal('show');
+  }
+
+  $.fn.genModal = function(type, msg){
+  switch(type){
+    case 'success':
+    case 'warning':
+    case 'info':
+    case 'danger': break;
+    default: type = "default"; break;
+  }
+
+  $(this).html('<div class="alert alert-'+type+' alert-dismissible" role="alert">\
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>\
+    '+msg+'\
+  </div>');
+  };
 })($)

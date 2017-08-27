@@ -4,69 +4,53 @@
 	var rows = <?= $cantidadmediciones;?>;
 
 	$(document).ready(function(){
-		//Cargar menú de tipos de documento
 		get_document();
+
+		var Conf = {min:fmin, max:fmax, noInp: rows, step: 5, step2: 10, no: 5000};
+		
+		jq_init(Conf);
+		
+		chartHolter(Conf);
 
 		$.submit_click("paciente/save_meditation", "paciente", $("#send_meditation"));
 
-		d = new Date();
-		mes = parseInt(d.getMonth()) + 1;
-		day = parseInt(d.getDay()) + 2;
-		if(d.getMonth() < 10){
-			mes = "0" + parseInt(d.getMonth() + 1);
-		}
-		if(d.getDay() < 10){
-			day = "0" + parseInt(d.getDay() + 2);
-		}
-		$("#date_ini").attr({
-       "max" : d.getFullYear() + "-" + mes + "-" + day,
-    });
+		field_date();
 
-		// Validaciòn 
 		$("#documento").change(function(){
 			if($("#tipodocum_id_tipodocum").val().length == 0){
-				alert("Debe Seleccionar Tipo De Documento");
+				$.message("Debe Seleccionar Tipo De Documento");
 				$(this).val("");
 			}else{
 				document_patient();
 			}
 		});
 
-		var Conf = {min:fmin, max:fmax, noInp: rows, step: 5, step2: 10, no: 5000};
-		
-		//Jqwidget grids	
-		jq_init(Conf);
-		
-		//Chart
-		chartHolter(Conf);
-
 		$("#excel").change(function(){
 			excel();
 		});
 	});
 
+	/**
+	* Function that get documetns types
+	*/
 	function get_document(){
 		$.ajax_process("paciente/get_document", function(response){
 			if(response.message != "ok"){
 				$.message(response.message);
-			} else{
-				var html = "<select class='form-control' id='tipodocum_id_tipodocum' name='tipodocum_id_tipodocum' required='required'>";
-				html += "<option value=''>SELECCIONE..</option>";
-				$.each(response.data, function(key, val){
-			    	html += "<option value='" + val.id_tipodocum + "'>" + val.nombre + "</option>";
-				});
-				html += "</select>";
-			    $("#tipodocum_id_tipodocum").replaceWith(html);
+			}else{
+				$("#tipodocum_id_tipodocum").html($.replaceHtmlTD(response.data, "tipodocum_id_tipodocum"));
 			}
 		});	
 	}
 
+	/**
+	* Function that validate document patient
+	*/
 	function document_patient(){
 		$.ajax_process("paciente/consult", function(response){
 			if(response.message != "ok"){
 				$(".msj-diag").genModal("danger","<b>Alerta:</b> "+response.message+' <a target="_blank" href="paciente" class="btn btn-default"><i class="glyphicon glyphicon-plus"></i> Crear paciente</a>')
 			} else{
-				console.log(response.data);
 				var usr = response.data[0];
 				$("#paciente_id_paciente").val(usr.id_paciente);  
 				$(".msj-diag").genModal("warning","Guardando información del paciente <b>"+usr.nombres+" "+usr.apellidos+"</b> ...")
@@ -74,18 +58,13 @@
 		});
 	}
 
+	/**
+	* Function that save the meditions patient
+	*/
 	function save_meditation(){
 		$.ajax_process("paciente/save_meditation", function(response){
 			if(response.message != "ok"){
 				$.message(response.message);
-			} else{
-				var html = "<select class='form-control' id='tipodocum_id_tipodocum' name='tipodocum_id_tipodocum' required='required'>";
-				html += "<option value=''>SELECCIONE..</option>";
-				$.each(response.data, function(key, val){
-			    	html += "<option value='" + val.id_tipodocum + "'>" + val.nombre + "</option>";
-				});
-				html += "</select>";
-			  $("#tipodocum_id_tipodocum").replaceWith(html);
 			}
 		});	
 	}
@@ -105,7 +84,6 @@
 			contentType: false,
 			dataType : "json",
 			success : function(response){
-				console.log(response.message);
 				if(response.message != "ok"){
 					if(response.data){
 						var html = "<center><h4>Errores En El Archivo De Excel</h4></center>";
@@ -145,9 +123,13 @@
 		});
 	}
 
+	/**
+	* Function that initialice grip 
+	+ @param object conf set values by each field
+	*/
 	var jq_init = function(Conf){
 		$(document).ready(function () {
-			// renderer for grid cells.
+			// render for grid cells.
 			var numberrenderer = function (row, column, value) {
 				return '<div style="text-align: center; margin-top: 5px;">' + (1 + value) + '</div>';
 			}
@@ -185,17 +167,16 @@
 					}
 				}
 			}
-			//};
+
 			var source = {
 				unboundmode: true,
 				totalrecords: Conf.noInp,
 				datafields: datafields,
 				updaterow: function (rowid, rowdata) {
-				// synchronize with the server - send update command   
+					// synchronize with the server - send update command   
 				}
 			};
 			var dataAdapter = new $.jqx.dataAdapter(source);
-			// initialize jqxGrid
 			$("#jqxgrid").jqxGrid({
 				width: 480,
 				source: dataAdapter,
@@ -206,5 +187,23 @@
 				columns: columns
 			});
 		});
+	}
+
+	/**
+	* Function that lock dates higher today
+	*/
+	function field_date(){
+		d = new Date();
+		mes = parseInt(d.getMonth()) + 1;
+		day = parseInt(d.getDay()) + 2;
+		if(d.getMonth() < 10){
+			mes = "0" + parseInt(d.getMonth() + 1);
+		}
+		if(d.getDay() < 10){
+			day = "0" + parseInt(d.getDay() + 2);
+		}
+		$("#date_ini").attr({
+      "max" : d.getFullYear() + "-" + mes + "-" + day,
+    });
 	}
 </script>

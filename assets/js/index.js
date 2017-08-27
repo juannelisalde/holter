@@ -122,7 +122,7 @@ var valObjectData =  function(obj){
 		for (att in v) {
 			var valInt = parseNum(v[att]);
 			if(v[att] == "" || valInt <= 0 || typeof valInt != "number"){
-				alert("Digite un valor válido en la respectiva celda");
+				$.message("Digite Un Valor Válido En La Respectiva Celda"); 
 				validate = false;
 				return false;
 			}else{

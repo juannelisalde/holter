@@ -69,6 +69,7 @@ create table medicionpaciente(
 	frecuencia_max int not null,
 	fecha_inicio datetime not null,
 	fecha_registro datetime not null,
+	observacion varchar(500) not null,
 	constraint pk_paciente_id_medicionpaciente primary key (id_medicionpaciente),
 	constraint uk_paciente_medicionpaciente unique (paciente_id_paciente, fecha_inicio),
 	constraint fk_medicionpaciente_paciente_id_paciente foreign key(paciente_id_paciente) references paciente(id_paciente),
@@ -82,7 +83,7 @@ create table recuperarpass(
 	fecha_creacion datetime not null,
 	constraint pk_recuperarpass_token primary key (token),
 	constraint fk_recuperarpass_usuario_id_usuario foreign key(id_usuario) references usuarios(id_usuario)
-) comment='oken password usuario';
+) comment='Token password usuario';
 
 
 INSERT INTO tipodocum (nombre, sigla, descripcion) VALUES

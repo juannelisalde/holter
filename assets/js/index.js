@@ -139,7 +139,8 @@ var valObjectData =  function(obj){
 
 	if(validate){
 		let calc= Math.pow(max-min, 2);
-		let gen = (calc+(calc*0.5) > 10000) ? 10000 : calc+(calc*0.5);
+		// let gen = (calc+(calc*0.5) > 10000) ? 10000 : calc+(calc*0.5);
+		let gen = (calc+(calc*0.5) > 10000) ? 10000 : calc;
 		let returnObj = {min: min, max: max, lh: lh, gen: gen};
 		console.log(returnObj);
 		return returnObj;

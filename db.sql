@@ -96,7 +96,7 @@ INSERT INTO usuarios (nombres, apellidos, email, pass, tipo_usuario, creacion_us
 
 
 INSERT INTO paciente (tipodocum_id_tipodocum, documento, nombres, apellidos, fecha_nacimiento, genero, telefono, celular, email, direccion)
-VALUES (1, "1032454463", "ALEJANDRO", "CASTIBLANCO","1993-01-06", "M", "1234567", "3132122866", "mc.alejo15@gmail.com", "Cll 123 a bis sur # 78 - 22");
+VALUES (1, "123456789", "PACIENTE", "PRUEBA","1993-01-01", "M", "1234567", "3132122866", "pruebas@gmail.com", "Calle falsa 123");
 
 INSERT INTO parametros (frecardiacamin, frecardiacamax, cantidadmediciones, fecha_creacion) VALUES 
 ('40', '180', '21', NOW());  

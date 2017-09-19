@@ -111,18 +111,16 @@
     
     var html =  "<div class='modal fade' id='myModal' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>";
     html += "   <div class='modal-dialog' role='document'>";
-    html += "     <div class='modal-content'>";
-    html += "       <div class='modal-header'>";
-    html += "         <h5 class='modal-title' id='exampleModalLabel'>Mensaje</h5>";
+    html += "     <div class='modal-content panel panel-warning'>";
+    html += "       <div class='modal-header panel-heading'>";
     html += "         <button type='button' class='close' data-dismiss='modal' aria-label='Close'>";
     html += "           <span aria-hidden='true'>&times;</span>";
     html += "         </button>";
+    html += "         <h5 class='modal-title panel-title' id='exampleModalLabel'><b>Mensaje de sistema</b></h5>";
     html += "       </div>";
-    html += "       <div class='modal-body'>";
+    html += "       <div class='modal-body'><b>";
     html +=           message;
-    html += "       </div>";
-    html += "       <div class='modal-footer'>";
-    html += "         <button type='button' class='btn btn-primary' data-dismiss='modal'>Close</button>";
+    html += "         </b><button type='button' class='btn btn-warning btn-right' data-dismiss='modal'><i class='glyphicon glyphicon-remove-circle'></i> Cerrar <A></A>lerta</button>";
     html += "       </div>";
     html += "     </div>";
     html += "   </div>";

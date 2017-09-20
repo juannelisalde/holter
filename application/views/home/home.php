@@ -33,6 +33,9 @@
 							    	<input type="file" class="form-control-file" id="excel" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
 							  	</div>
 							  	<div class="form-group col-sm-4 col-md-5 col-lg-6">
+							  		<input type="number" id="inp_gen" placeholder="Variación de puntos en las gráficas" />
+							  	</div>
+							  	<div class="form-group col-sm-4 col-md-5 col-lg-6">
 							  		<button id="csvJson" type="button" class="btn btn-info"><i class="glyphicon glyphicon-heart"></i> Generar diagnóstico</button>
 							  	</div>
 								</form>

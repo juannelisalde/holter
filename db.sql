@@ -92,7 +92,8 @@ INSERT INTO tipodocum (nombre, sigla, descripcion) VALUES
 
 INSERT INTO usuarios (nombres, apellidos, email, pass, tipo_usuario, creacion_usuario) VALUES 
 ('JUAN', 'NARANJO', 'juan.n.elisalde@gmail.com', SHA1('1234'), 'ADMIN', '2017-08-17 00:00:00'),
-('ALEJANDRO', 'CASTIBLANCO', 'mc.alejo16@gmail.com', SHA1('1234'), 'ADMIN', NOW());
+('ALEJANDRO', 'CASTIBLANCO', 'mc.alejo16@gmail.com', SHA1('1234'), 'ADMIN', NOW()),
+('ADMIN', 'GRUPO INSIGHT', 'grupoinsight2025@yahoo.es', SHA1('GrupoInsight2017'), 'ADMIN', NOW());
 
 
 INSERT INTO paciente (tipodocum_id_tipodocum, documento, nombres, apellidos, fecha_nacimiento, genero, telefono, celular, email, direccion)

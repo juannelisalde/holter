@@ -8,6 +8,26 @@
  */
 
 // 
+function genListItem(max, step){
+	var min = 0, cnt = 0;
+	var arr = new Array(max);
+
+
+		for (var y = 0; y < max; y++) {
+			arr[y] = new Array(max);
+			for (var x = 0; x < max; x++) {
+
+				arr[y][x] = cnt;
+				var mod_cnt = (((y+1) % step) == 0) && (((x+1) % step) == 0);
+				if(mod_cnt) cnt++;
+			};
+		};
+
+	console.log(arr);
+	return arr;
+	// sessionStorage.setItem('genListItem', JSON.stringify(arr));
+
+}
 
 function redondear(num, fact, op){
  var resto = num % fact, bool = (op)? (resto < fact && resto > 0) : op;
@@ -138,8 +158,11 @@ var valObjectData =  function(obj){
 	});
 
 	if(validate){
-		let calc= Math.pow(max-min, 2);
-		let gen = (calc+(calc*0.5) > 10000) ? 10000 : calc+(calc*0.5);
+		console.log($("#inp_gen").val());
+		let inp_gen = ($("#inp_gen").val() == "")? 1.38: $("#inp_gen").val();
+		let calc= Math.pow(max-min, inp_gen);
+		let gen = (calc+(calc*inp_gen) > 10000) ? 10000 : Math.floor(calc+(calc*inp_gen));
+		// let gen = (calc > 10000) ? 10000 : calc;
 		let returnObj = {min: min, max: max, lh: lh, gen: gen};
 		console.log(returnObj);
 		return returnObj;
@@ -212,6 +235,13 @@ chartHolter = function(Conf) {
 	    series: [{
 	        name: 'Toma de muestra',
 	        type: 'polygon',
+	        data: [],
+	        color: 'rgba(255, 206, 84, 0.7)',
+	        enableMouseTracking: true
+
+	    },{
+	        name: 'Toma de muestra por puntos',
+	        type: 'scatter',
 	        data: [],
 	        color: 'rgba(255, 206, 84, 0.7)',
 	        enableMouseTracking: true
@@ -300,7 +330,18 @@ chartHolter = function(Conf) {
 	        color: 'rgba(255, 206, 84, 0.7)',
 	        enableMouseTracking: true
 
+<<<<<<< HEAD
 	    },{
+=======
+	    }, {
+	        name: 'Toma de muestra por puntos',
+	        type: 'scatter',
+	        data: [],
+	        color: 'rgba(255, 206, 84, 0.7)',
+	        enableMouseTracking: true
+
+	    }/*,{
+>>>>>>> 9f8565cde053d01cf5bf3d5d9b1890991bfcad8c
 	        name: 'Frecuencia cardiaca',
 	        type: 'scatter',
 	        color: Highcharts.getOptions().colors[1],
@@ -354,16 +395,19 @@ chartHolter = function(Conf) {
 		var gendata = genObj(genSimulate(dataSim, dataSim.no));
 
 		chart.series[0].setData(gendata);
-		chart.series[1].setData(genObj(genSimulate(dataSim2, dataSim2.no)));
+		// chart.series[1].setData(gendata);
+		chart2.series[0].setData(gendata);
+		// chart2.series[1].setData(gendata);
+		// chart.series[1].setData(genObj(genSimulate(dataSim2, dataSim2.no)));
 
 		var gendata2 = genObj(genSimulate(dataSim, dataSim.no));
-		chart2.series[0].setData(gendata);
-		chart2.series[1].setData(genObj(genSimulate(dataSim2, dataSim2.no)));
+		// chart2.series[1].setData(genObj(genSimulate(dataSim2, dataSim2.no)));
 
 
 	});
 
 	 $("#csvJson").click(function () {
+
       	  var jsonVal = $("#jqxgrid").jqxGrid('exportdata', 'json');
 	      var validate = valObjectData(jsonVal);
 	      if(validate){
@@ -374,6 +418,8 @@ chartHolter = function(Conf) {
 	      	var gendata = genObj(genSimulate(dataSim, dataSim.no));
 	      	chart.series[0].setData(gendata);
 	      	chart2.series[0].setData(gendata);
+	      	chart.series[1].setData(gendata);
+	      	chart2.series[1].setData(gendata);
 	      	var result = calculaResultado(Conf.max, validate.min, validate.max);
 	      	$("#diagnostic-body").html('\
 	      			<h4><i class="glyphicon glyphicon-bookmark"></i> Resultados</h4>\

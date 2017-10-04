@@ -113,12 +113,23 @@
     html += "   <div class='modal-dialog' role='document'>";
     html += "     <div class='modal-content panel panel-warning'>";
     html += "       <div class='modal-header panel-heading'>";
+<<<<<<< HEAD
     html += "         <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
     html += "         <h4 class='modal-title' id='myModalLabel'>Mensaje de sistema</h4>";
     html += "       </div>";
     html += "       <div class='modal-body panel-body'>";
     html +=           message;
     html += "         <button type='button' class='btn btn-warning' style='float: right;' data-dismiss='modal'><i class='glyphicon glyphicon-remove-circle'></i> Cerrar alerta</button>";
+=======
+    html += "         <button type='button' class='close' data-dismiss='modal' aria-label='Close'>";
+    html += "           <span aria-hidden='true'>&times;</span>";
+    html += "         </button>";
+    html += "         <h5 class='modal-title panel-title' id='exampleModalLabel'><b>Mensaje de sistema</b></h5>";
+    html += "       </div>";
+    html += "       <div class='modal-body'><b>";
+    html +=           message;
+    html += "         </b><button type='button' class='btn btn-warning btn-right' data-dismiss='modal'><i class='glyphicon glyphicon-remove-circle'></i> Cerrar <A></A>lerta</button>";
+>>>>>>> 9f8565cde053d01cf5bf3d5d9b1890991bfcad8c
     html += "       </div>";
     html += "     </div>";
     html += "   </div>";

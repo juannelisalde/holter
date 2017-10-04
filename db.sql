@@ -69,6 +69,7 @@ create table medicionpaciente(
 	frecuencia_max int not null,
 	fecha_inicio datetime not null,
 	fecha_registro datetime not null,
+	observacion varchar(500) not null,
 	constraint pk_paciente_id_medicionpaciente primary key (id_medicionpaciente),
 	constraint uk_paciente_medicionpaciente unique (paciente_id_paciente, fecha_inicio),
 	constraint fk_medicionpaciente_paciente_id_paciente foreign key(paciente_id_paciente) references paciente(id_paciente),
@@ -82,7 +83,7 @@ create table recuperarpass(
 	fecha_creacion datetime not null,
 	constraint pk_recuperarpass_token primary key (token),
 	constraint fk_recuperarpass_usuario_id_usuario foreign key(id_usuario) references usuarios(id_usuario)
-) comment='oken password usuario';
+) comment='Token password usuario';
 
 
 INSERT INTO tipodocum (nombre, sigla, descripcion) VALUES
@@ -91,11 +92,12 @@ INSERT INTO tipodocum (nombre, sigla, descripcion) VALUES
 
 INSERT INTO usuarios (nombres, apellidos, email, pass, tipo_usuario, creacion_usuario) VALUES 
 ('JUAN', 'NARANJO', 'juan.n.elisalde@gmail.com', SHA1('1234'), 'ADMIN', '2017-08-17 00:00:00'),
-('ALEJANDRO', 'CASTIBLANCO', 'mc.alejo16@gmail.com', SHA1('1234'), 'ADMIN', NOW());
+('ALEJANDRO', 'CASTIBLANCO', 'mc.alejo16@gmail.com', SHA1('1234'), 'ADMIN', NOW()),
+('ADMIN', 'GRUPO INSIGHT', 'grupoinsight2025@yahoo.es', SHA1('GrupoInsight2017'), 'ADMIN', NOW());
 
 
 INSERT INTO paciente (tipodocum_id_tipodocum, documento, nombres, apellidos, fecha_nacimiento, genero, telefono, celular, email, direccion)
-VALUES (1, "1032454463", "ALEJANDRO", "CASTIBLANCO","1993-01-06", "M", "1234567", "3132122866", "mc.alejo15@gmail.com", "Cll 123 a bis sur # 78 - 22");
+VALUES (1, "123456789", "PACIENTE", "PRUEBA","1993-01-01", "M", "1234567", "3132122866", "pruebas@gmail.com", "Calle falsa 123");
 
 INSERT INTO parametros (frecardiacamin, frecardiacamax, cantidadmediciones, fecha_creacion) VALUES 
 ('40', '180', '21', NOW());  

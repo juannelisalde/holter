@@ -43,3 +43,8 @@
 	opacity: 1;
   filter: Alpha(opacity=100);
 }
+
+.btn-right{
+	float: right;
+    margin-top: -5px;
+}

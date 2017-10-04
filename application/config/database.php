@@ -76,8 +76,13 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
+<<<<<<< HEAD
 	'username' => 'root',
 	'password' => 'Mac0106',
+=======
+	'username' => 'test',
+	'password' => '123456',
+>>>>>>> 9f8565cde053d01cf5bf3d5d9b1890991bfcad8c
 	'database' => 'holterdb',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

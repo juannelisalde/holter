@@ -300,14 +300,15 @@ chartHolter = function(Conf) {
 	        color: 'rgba(255, 206, 84, 0.7)',
 	        enableMouseTracking: true
 
-	    }/*,{
+	    },{
 	        name: 'Frecuencia cardiaca',
 	        type: 'scatter',
 	        color: Highcharts.getOptions().colors[1],
 	        data: [],
 	        enableMouseTracking: true
 
-	    }, {
+	    }
+	    /*, {
 	        name: 'Segunda Toma',
 	        type: 'polygon',
 	        color: 'rgba(160, 212, 104, 0.7)',
